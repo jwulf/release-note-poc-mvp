@@ -5,7 +5,7 @@ import { RELEASE_TAG } from "./stage-00-set-release";
 dotenv.config()
 
 const octokit = new Octokit({
-auth: process.env.GITHUB_TOKEN,
+    auth: process.env.GITHUB_TOKEN,
 });
 
 // Grab the release RELEASE_TAG from GitHub via the API, and create a JSON object containing the issues in the release
