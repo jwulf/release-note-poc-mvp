@@ -88,13 +88,13 @@ const releaseNotes = transformReleaseNoteItems(require(`./${inputFile}`))
 const template = `# Release Notes for Camunda ${RELEASE_TAG}
 
 {{#each components}}
-## {{key}}
+# {{key}}
 {{#each subcomponents}}
-## {{key}}
+## {{../key}} > {{key}}
 {{#each contexts}}
-## {{key}}
+### {{../../key}} > {{../key}} > {{key}}
 {{#each items}}
-### [{{this.title}}]({{this.url}})
+#### [{{this.title}}]({{this.url}})
 
 {{this.releaseNoteText}}
 {{/each}}
