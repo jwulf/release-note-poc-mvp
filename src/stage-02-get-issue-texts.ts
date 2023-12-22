@@ -113,6 +113,7 @@ async function main() {
             console.log(`Got text`)
         } catch (e: any) {
             issuesWithError.push({...issue, gitHubText: `Error: ${e.message}`})
+            console.log(`Error: ${e.message}`)
         }
         await delay(1000)
     }

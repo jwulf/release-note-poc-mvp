@@ -12,7 +12,7 @@ const apiKey = process.env.OPENAI_API_KEY; // Replace with your ChatGPT API key
 
 const issues = JSON.parse(fs.readFileSync(inputFile, {encoding: "utf8"}))
 
-const prompt = "You take GitHub issue text and produce a release note consisting of four parts: a consequence, a cause, a fix, and a result. The consequence is the impact of the issue, expressed in the observable behaviour of the system for the user, and written in the past tense. The cause is the underlying cause of the issue, expressed in terms of the technical engineering of the product, and written in the past tense. The fix is a description of the technical fix to the product, written in the past tense. The result is a description of the observable behaviour of the system for the user when this fix is applied, written in present tense. Avoid repetition.";
+const prompt = "You take GitHub issue text and produce a release note consisting of four parts: a consequence, a cause, a fix, and a result. The consequence is the impact of the issue, expressed in the observable behaviour of the system for the user, and written in the past tense. The cause is the underlying cause of the issue, expressed in terms of the technical engineering of the product, and written in the past tense. The fix is a description of the technical fix to the product, written in the past tense. The result is a description of the observable behaviour of the system for the user when this fix is applied, written in present tense. Avoid repetition. Use active voice.";
 
 async function generateChatGPTResponse(text: string) {
     console.log('Contacting ChatGPT...')

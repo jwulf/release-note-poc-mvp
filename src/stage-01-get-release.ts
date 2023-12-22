@@ -4,6 +4,10 @@ import dotenv from "dotenv"
 import { RELEASE_TAG } from "./stage-00-set-release";
 dotenv.config()
 
+if (!process.env.GITHUB_TOKEN) {
+    console.log('Warning! No GITHUB_TOKEN in environment.')
+}
+
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
 });
@@ -11,7 +15,7 @@ const octokit = new Octokit({
 // Grab the release RELEASE_TAG from GitHub via the API, and create a JSON object containing the issues in the release
 async function main() {
     const {data} = await octokit.repos.listReleases({owner: 'camunda',repo: 'camunda-platform', per_page: 1000})
-    const relevant_releases = data.filter(({tag_name}) => tag_name.includes(RELEASE_TAG) && !tag_name.includes('alpha'))
+    const relevant_releases = data.filter(({tag_name}) => tag_name.includes(RELEASE_TAG) /** && !tag_name.includes('alpha') */)
 
     console.log(`Retrieved ${relevant_releases.length} releases for ${RELEASE_TAG}`)
 
