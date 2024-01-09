@@ -10,6 +10,8 @@ const issues = JSON.parse(fs.readFileSync(stage_three_output_filename, {encoding
 
 const prompt = "You take GitHub issue text and produce a release note consisting of four parts: a consequence, a cause, a fix, and a result. The consequence is the impact of the issue, expressed in the observable behaviour of the system for the user, and written in the past tense. The cause is the underlying cause of the issue, expressed in terms of the technical engineering of the product, and written in the past tense. The fix is a description of the technical fix to the product, written in the past tense. The result is a description of the observable behaviour of the system for the user when this fix is applied, written in present tense. Avoid repetition. Use active voice.";
 
+const delay = (ms: number) => new Promise(res => setTimeout(() => res(null), ms))
+
 async function generateChatGPTResponse(text: string) {
     console.log('Contacting ChatGPT...')
     const data = {
@@ -43,39 +45,35 @@ async function generateChatGPTResponse(text: string) {
 }
 
 async function main() {
-    const withRelNote: any[] = fs.existsSync(stage_four_output_filename) ?
-        JSON.parse(fs.readFileSync(stage_four_output_filename, {encoding: "utf8"})) : []
+    const withRelNote: any[] = [] 
     const withError: any[] = []
     let total = issues.length
     let done = 1
     for (const issue of issues) {
-        const existingIssue = withRelNote.filter(i => i.url === issue.url)?.[0]
-        if (existingIssue?.releaseNoteText) {
-            withRelNote.push(existingIssue)
-        } else {
-            const {title, gitHubText} = issue
-            try {
-                const releaseNoteText = cleanAIEntry(await generateChatGPTResponse(`${title}\n${gitHubText}`))
-                if (releaseNoteText == 'An error occurred while generating a response.') {
-                  throw new Error(releaseNoteText)
-                }
-                withRelNote.push({...removeGithubText(issue), releaseNoteText})
-                console.log(`\n${title}\n${releaseNoteText}`)
-            } catch (e: any) {
-                console.log(title, e.message)
-                withError.push({...issue, releaseNoteText: `Error: ${e.message}`})
+        const {title, gitHubText} = issue
+        try {
+            const releaseNoteText = cleanAIEntry(await generateChatGPTResponse(`${title}\n${gitHubText}`))
+            if (releaseNoteText == 'An error occurred while generating a response.') {
+              throw new Error(releaseNoteText)
             }
-            // Incremental update to file
-            fs.writeFileSync(stage_four_output_filename, JSON.stringify(withRelNote, null, 2), {encoding: "utf8"})
-            fs.writeFileSync(stage_four_errors_filename, JSON.stringify(withError, null, 2), {encoding: "utf8"})
+            withRelNote.push({...removeGithubText(issue), releaseNoteText})
+            console.log(`\n${title}\n${releaseNoteText}`)
+        } catch (e: any) {
+            console.log(title, e.message)
+            withError.push({...issue, releaseNoteText: `Error: ${e.message}`})
         }
+    
+        // Incremental update to file
+        fs.writeFileSync(stage_four_output_filename, JSON.stringify(withRelNote, null, 2), {encoding: "utf8"})
+        fs.writeFileSync(stage_four_errors_filename, JSON.stringify(withError, null, 2), {encoding: "utf8"})
+        
         console.log(`${done++}/${total}...`)
         if (done == total) {
           console.log(`Wrote ${withRelNote.length} release notes to ${stage_four_output_filename}`)
           console.log(`Wrote ${withError.length} errors to ${stage_four_errors_filename}`)
         }
-        // await delay(300)
-    }
+        await delay(200)
+      }
 }
 
 const removeGithubText = (issue: any) => {

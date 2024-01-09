@@ -16,8 +16,8 @@ const octokit = new Octokit({
 // Grab the release RELEASE_TAG from GitHub via the API, and create a JSON object containing the issues in the release
 async function main() {
     const {data} = await octokit.repos.listReleases({owner: 'camunda',repo: 'camunda-platform', per_page: 1000})
-    const relevant_releases = data.filter(({tag_name}) => tag_name.includes(RELEASE_TAG) /** && !tag_name.includes('alpha') */)
-
+    const relevant_releases = data.filter(({tag_name}) => tag_name === RELEASE_TAG) 
+    
     console.log(`Retrieved ${relevant_releases.length} releases for ${RELEASE_TAG}`)
 
     fs.writeFileSync(stage_one_intermediate_filename, JSON.stringify(relevant_releases, null, 2), {encoding: 'utf8'})

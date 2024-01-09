@@ -19,9 +19,6 @@ interface GitHubIssueInfo {
 }
 
 const octokit = (owner: string) => {
-    if (owner === 'camunda-cloud') {
-        console.log(`Using camunda-cloud token`)
-    }
     return owner === 'camunda-cloud' ? octokitCamundaCloud : octokitCamunda
 }
 
