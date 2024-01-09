@@ -1,5 +1,9 @@
 # Release Notes for Camunda 8.4.0
 
+A complete list of changes in this release can be viewed on [GitHub](https://github.com/camunda/camunda-platform/releases/tag/8.4.0).
+
+These release notes are a high-level summary of the main features of the release, generated from the GitHub pull requests and issues by AI. 
+
 <!-- vscode-markdown-toc -->
 * 1. [Zeebe > Broker](#ZeebeBroker)
 	* 1.1. [Zeebe > Broker > Enhancements](#ZeebeBrokerEnhancements)
