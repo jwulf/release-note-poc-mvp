@@ -1,1 +1,1 @@
-export const RELEASE_TAG = '8.4.0-alpha2'
+export const RELEASE_TAG = '8.4.0'

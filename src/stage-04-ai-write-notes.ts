@@ -1,16 +1,12 @@
 import fs from "fs"
 import axios from 'axios';
 import dotenv from "dotenv"
-import { RELEASE_TAG } from "./stage-00-set-release";
+import { stage_four_errors_filename, stage_four_output_filename, stage_three_output_filename } from "./constants";
 dotenv.config()
-
-const outputFile = `05-ai-release-notes-${RELEASE_TAG}.json`
-const errorsFile = `05-ai-errors-${RELEASE_TAG}.json`
-const inputFile = `04-relevant-issues-with-text-${RELEASE_TAG}.json`
 
 const apiKey = process.env.OPENAI_API_KEY; // Replace with your ChatGPT API key
 
-const issues = JSON.parse(fs.readFileSync(inputFile, {encoding: "utf8"}))
+const issues = JSON.parse(fs.readFileSync(stage_three_output_filename, {encoding: "utf8"}))
 
 const prompt = "You take GitHub issue text and produce a release note consisting of four parts: a consequence, a cause, a fix, and a result. The consequence is the impact of the issue, expressed in the observable behaviour of the system for the user, and written in the past tense. The cause is the underlying cause of the issue, expressed in terms of the technical engineering of the product, and written in the past tense. The fix is a description of the technical fix to the product, written in the past tense. The result is a description of the observable behaviour of the system for the user when this fix is applied, written in present tense. Avoid repetition. Use active voice.";
 
@@ -47,8 +43,8 @@ async function generateChatGPTResponse(text: string) {
 }
 
 async function main() {
-    const withRelNote: any[] = fs.existsSync(outputFile) ?
-        JSON.parse(fs.readFileSync(outputFile, {encoding: "utf8"})) : []
+    const withRelNote: any[] = fs.existsSync(stage_four_output_filename) ?
+        JSON.parse(fs.readFileSync(stage_four_output_filename, {encoding: "utf8"})) : []
     const withError: any[] = []
     let total = issues.length
     let done = 1
@@ -70,13 +66,13 @@ async function main() {
                 withError.push({...issue, releaseNoteText: `Error: ${e.message}`})
             }
             // Incremental update to file
-            fs.writeFileSync(outputFile, JSON.stringify(withRelNote, null, 2), {encoding: "utf8"})
-            fs.writeFileSync(errorsFile, JSON.stringify(withError, null, 2), {encoding: "utf8"})
+            fs.writeFileSync(stage_four_output_filename, JSON.stringify(withRelNote, null, 2), {encoding: "utf8"})
+            fs.writeFileSync(stage_four_errors_filename, JSON.stringify(withError, null, 2), {encoding: "utf8"})
         }
         console.log(`${done++}/${total}...`)
         if (done == total) {
-          console.log(`Wrote ${withRelNote.length} release notes to ${outputFile}`)
-          console.log(`Wrote ${withError.length} errors to ${errorsFile}`)
+          console.log(`Wrote ${withRelNote.length} release notes to ${stage_four_output_filename}`)
+          console.log(`Wrote ${withError.length} errors to ${stage_four_errors_filename}`)
         }
         // await delay(300)
     }

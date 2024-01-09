@@ -1,10 +1,7 @@
 import fs from "fs"
-import { RELEASE_TAG } from "./stage-00-set-release";
+import { stage_three_output_filename, stage_two_output_filename } from "./constants";
 
-const inputFile = `03-release-issues-with-text-${RELEASE_TAG}.json`
-const outputFile = `04-relevant-issues-with-text-${RELEASE_TAG}.json`
-
-const issues = JSON.parse(fs.readFileSync(inputFile, {encoding: "utf8"}))
+const issues = JSON.parse(fs.readFileSync(stage_two_output_filename, {encoding: "utf8"}))
 
 const toRemove = [
     "🧹 Chore",
@@ -15,6 +12,6 @@ const removeChores = (issue: any) => !toRemove.includes(issue.context)
 
 const relevantIssues = issues.filter(removeChores)
 
-fs.writeFileSync(outputFile, JSON.stringify(relevantIssues, null, 2), {encoding: "utf8"})
+fs.writeFileSync(stage_three_output_filename, JSON.stringify(relevantIssues, null, 2), {encoding: "utf8"})
 
-console.log(`Wrote ${relevantIssues.length} issues to ${outputFile}`)
+console.log(`Wrote ${relevantIssues.length} issues to ${stage_three_output_filename}`)

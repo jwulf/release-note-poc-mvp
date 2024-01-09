@@ -1,9 +1,7 @@
 import Handlebars from 'handlebars';
 import fs from "fs"
 import { RELEASE_TAG } from "./stage-00-set-release";
-
-const inputFile = `05-ai-release-notes-${RELEASE_TAG}.json`
-const outputFile = `06-release-notes-${RELEASE_TAG}.md`
+import { stage_five_output_filename, stage_four_output_filename } from './constants';
 
 interface ReleaseNoteItem {
     release: string;
@@ -83,7 +81,7 @@ interface ReleaseNoteItem {
     }, { components: [] } as ReleaseNotes);
   };
   
-const releaseNotes = transformReleaseNoteItems(require(`./${inputFile}`))
+const releaseNotes = transformReleaseNoteItems(require(`./${stage_four_output_filename}`))
 
 const template = `# Release Notes for Camunda ${RELEASE_TAG}
 
@@ -105,4 +103,4 @@ const template = `# Release Notes for Camunda ${RELEASE_TAG}
 
 const result = Handlebars.compile(template)(releaseNotes);
 
-fs.writeFileSync(outputFile, result, {encoding: "utf8"})
+fs.writeFileSync(stage_five_output_filename, result, {encoding: "utf8"})

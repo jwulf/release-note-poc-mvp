@@ -2,6 +2,7 @@ import { Octokit } from "@octokit/rest";
 import fs from 'fs'
 import dotenv from "dotenv"
 import { RELEASE_TAG } from "./stage-00-set-release";
+import { stage_one_intermediate_filename, stage_one_output_filename } from "./constants";
 dotenv.config()
 
 if (!process.env.GITHUB_TOKEN) {
@@ -19,7 +20,7 @@ async function main() {
 
     console.log(`Retrieved ${relevant_releases.length} releases for ${RELEASE_TAG}`)
 
-    fs.writeFileSync(`01-raw-github-api-response-${RELEASE_TAG}.json`, JSON.stringify(relevant_releases, null, 2), {encoding: 'utf8'})
+    fs.writeFileSync(stage_one_intermediate_filename, JSON.stringify(relevant_releases, null, 2), {encoding: 'utf8'})
 
     const releases = relevant_releases.map(release => ({
         release: release.tag_name,
@@ -32,9 +33,8 @@ async function main() {
             release: rel.release,
             ...note})))
 
-    const outputFileName = `02-release-issues-${RELEASE_TAG}.json`
-    fs.writeFileSync(outputFileName, JSON.stringify(releaseWithIssues, null, 2))
-    console.log(`Wrote file ${outputFileName}`)
+    fs.writeFileSync(stage_one_output_filename, JSON.stringify(releaseWithIssues, null, 2))
+    console.log(`Wrote file ${stage_one_output_filename}`)
 }
 
 // Parse the release notes body text, and extract the issues in the release to JSON

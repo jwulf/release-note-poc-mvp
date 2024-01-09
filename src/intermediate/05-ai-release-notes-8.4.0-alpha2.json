@@ -1,0 +1,920 @@
+[
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15161",
+    "component": "Zeebe",
+    "subcomponent": "Java Client",
+    "context": "Enhancements",
+    "title": "Provide the Java client's interfaces for migrating a process instance",
+    "releaseNoteText": "Previously, users of the Java client were not able to migrate process instances through the API.\nThe interfaces allowing this action were not yet fully implemented in the Java client, leading to limitations in development opportunities.\nTo expedite the process, the interfaces of the Java client were provided without full implementation. This strategic approach was aimed at quickly unlocking further Operate development.\nNow, despite not having a fully implemented system, users can develop against these interfaces—facilitating process instance migration via the Java client's API.\n"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14921",
+    "component": "Zeebe",
+    "subcomponent": "Java Client",
+    "context": "Enhancements",
+    "title": "Support migrating a process instance from the Java client",
+    "releaseNoteText": "Previously, users of the Java client couldn't migrate process instances through the API. The Java client also lacked an interface for migrating a process instance, which limited its functionality.\nThis was because the Java client was not initially designed with migration capabilities in mind.\nWe implemented the ability for the Java client to migrate process instances through the API. This entailed the creation of new Java client interfaces specifically designed for migrating a process instance.\nNow, users can easily migrate process instances using the Java client. They can also reuse a migration plan for migrating several process instances. Through the newly added interfaces, migration capabilities are significantly enhanced and user flexibility is increased."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15153",
+    "component": "Zeebe",
+    "subcomponent": "Go Client",
+    "context": "Enhancements",
+    "title": "Go client commands allow specifying a `tenantId` / `tenantIds` property",
+    "releaseNoteText": "Prior to this fix, the Zeebe Go client did not support multi-tenancy, preventing users from specifying a `tenantId` or `tenantIds` for certain command operations.\nThis issue arose because the following commands lacked a method to set a `tenantId`: `DeployResource`, `CreateProcessInstance`, `PublishMessage`, `BroadcastSignal`, `EvaluateDecision`. Additionally, the `ActivateJobs` command lacked a method to set `tenantIds`.\nWe updated the Go client code to include methods that allow the setting of `tenantId` and `tenantIds` in the command operations listed above.\nWith this fix, users are now able to assign a `tenantId` to `DeployResource`, `CreateProcessInstance`, `PublishMessage`, `BroadcastSignal` and `EvaluateDecision` commands. For `ActivateJobs` command, users can assign `tenantIds`. This allows the Zeebe Go client to effectively support multi-tenancy."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14477",
+    "component": "Zeebe",
+    "subcomponent": "Go Client",
+    "context": "Enhancements",
+    "title": "Add multi-tenancy support in the Zeebe Go client",
+    "releaseNoteText": "Earlier, Zeebe Go client could not support multi-tenancy, which limited its functionality and usability for users who needed to run multiple instances with tenant isolation.\nThis issue was caused by the lack of implemented support for multi-tenancy in the initial Zeebe Go client codebase.\nEfforts to implement multi-tenancy support in the Zeebe Go client were initiated, however, they were de-prioritized, and the task was put back to the backlog.\nCurrently, multi-tenancy support in Zeebe Go client is not implemented yet, and there is no clear timeline when this functionality will be picked up again."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/6150",
+    "component": "Zeebe",
+    "subcomponent": "Go Client",
+    "context": "Enhancements",
+    "title": "go-client: Job worker polling backoff mechanism",
+    "releaseNoteText": " \nIn the past, any time an error was received from the gateway by the job worker in the Go client, there was no delay mechanism for subsequent pollings for available jobs. This lack of backoff strategy could lead to excessive load, especially during high-error periods.\n \nPrevious iterations of the Go client didn’t include a backoff mechanism like the one in the Java client. This mechanism is essential to reduce strain on the system because it delays the worker's next poll for available jobs upon receiving an error from the gateway.\n \nA default exponential backoff mechanism was added to the Go client, mirroring the Java client's approach. This new functionality includes customizable settings for maxDelay, minDelay, backoffFactor, and jitterFactor, and the capacity for users to provide their own implementation of a backoff strategy. \n \nWith the fix in place, when the job poller in the Go client encounters an error, it will now implement a delay before polling for available jobs again. This delay increases exponentially with each error to a maximum delay limit, effectively reducing strain when errors occur. Users can customize backoff parameters or provide their own strategy for increased flexibility and optimization."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15391",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Allow setting `scope` parameter for OAuth2 authentication",
+    "releaseNoteText": "Users were unable to authenticate using Microsoft Entra ID (Azure AD) and generic OpenID Connect because the Zeebe Java client didn't support setting the `scope` parameter in the token request, limiting login alternatives. \nThe Zeebe Java client did not initially include functionality to set the `scope` parameter, this was an oversight during the development phase of the client. \nThe Zeebe Java client was updated to support setting the `scope` parameter in the token request, extending its OAuth2 authentication compatibility. \nUsers can now authenticate using their Microsoft Entra ID (Azure AD) and generic OpenID Connect, providing a wider variety of login options."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15389",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Configure `identity-sdk` through `identity-spring-boot-starter` in the Gateway",
+    "releaseNoteText": "Previously, every time Identity added new configuration properties, they had to be added to Zeebe, creating dependencies and unnecessary repetition.\nThis was caused by the identity configuration properties being directly linked with Zeebe configuration classes. There was no specific mechanism to decouple these two components, leading to increased complexity in maintaining and updating the system.\nSeveral modifications were made to implement and integrate the `identity-spring-boot-starter` to decouple Identity configuration properties from Zeebe. This includes autowiring of an `IdentityConfiguration` bean in the `StandaloneGateway` class and passing it to the `Gateway` constructor, and modifying the `MultiTenancyOverIdentityIT` test to configure Identity using an `IdentityConfiguration` bean.\nZeebe no longer needs to update every time Identity adds new configuration properties. The identity configuration is now managed independently through the `identity-spring-boot-starter`, providing a leaner and cleaner system configuration mechanism."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15382",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Add integration test to `MultiTenancyOverIdentityIT` test",
+    "releaseNoteText": "Previously, the `MultiTenancyOverIdentityIT` test suite had inadequate coverage, leading to potential obscure bugs and unexpected behaviour in a multi-tenancy setting. \nThe reason for this issue was the absence of necessary integration tests in the `MultiTenancyOverIdentityIT` test suite. \nComprehensive integration tests were added to the `MultiTenancyOverIdentityIT` test. An example test case `shouldCompleteJobForTenant` was provided for further reference.\nNow, the `MultiTenancyOverIdentityIT` test suite covers more scenarios, ensuring reliable and predictable behavior across different tenants."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15306",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Support ElasticSearch 8.9+",
+    "releaseNoteText": "The system was unable to support ElasticSearch versions 8.9 and above, prohibiting users from leveraging the latest features, bug fixes, and resolving CVEs that came with the newer ElasticSearch versions.\nThe incompatibility was due to outdated ElasticSearch dependencies in Zeebe's codebase, which was not configured to automatically update for the ElasticSearch client.\nThe development team manually updated Zeebe's ElasticSearch dependencies to version 8.9+. Additionally, the dependencies in zeebe-analytics were also updated. These updates were then thoroughly validated through a series of successful test runs.\nZeebe now supports ElasticSearch 8.9 and above, allowing users to benefit from the latest improvements and enhancements included in these versions. Users should be able to upgrade their ElasticSearch instances without encountering compatibility issues."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15193",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Update `broker.yaml.template` and `broker.standalone.yaml.template` files in order to allow user to disable form exporting",
+    "releaseNoteText": "Users were unable to disable form exporting from the `broker.yaml.template` and `broker.standalone.yaml.template` files.\nThe necessary option to disable form exporting was not present in these template files previously.\nWe updated the `broker.yaml.template` and `broker.standalone.yaml.template` files to include the option for users to disable form exporting.\nUsers can now disable form exporting in both `broker.yaml.template` and `broker.standalone.yaml.template` files."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15140",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Export compensation subscription events",
+    "releaseNoteText": " Previously, BPMN compensation events did not have a compensation record exported to Elasticsearch and OpenSearch.\n The issue was due to the lack of implementation of the record in the exporters, following the steps indicated in the development guide.\n We resolved the problem by adding the record for the exporters as mentioned in the development guide, through Pull request (https://github.com/camunda/zeebe/pull/15392).\n Now, compensation events can be efficiently tracked because these events are properly exported to Elasticsearch and OpenSearch."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15114",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Migrate task instances with variables",
+    "releaseNoteText": " Users were unable to migrate task instances that had associated variables.\n The feature to update the properties of variables during the process migration was absent in the system, resulting in the element IDs of variable instances being unchangeable.\n We introduced a new `VariableIntent` `MIGRATED` and created an event applier that updates specific properties of a variable. In the `ProcessInstanceMigration` command processor, we set up appending 'Variable: MIGRATED' event for each variable of a process instance and for each variable at the child element instance scope. We also cleared the variable's `value` during these events to avoid exceeding the result records batch size. \n Users can now successfully migrate a process instance and utilize the variables in activated jobs. They can also update these variables with the Set Variables RPC."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15113",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Migrate service task instances (including jobs)",
+    "releaseNoteText": " Previously, during process instance migration, service task instances and their related jobs could not be properly migrated. Consequently, users were unable to perform job commands (e.g., activate, fail, throwError, yield, complete, etc.) on migrated instances.\n This issue was caused because there was no `JobIntent` `MIGRATED` and the `ProcessInstanceMigration` command processor did not account for child instances of the type `SERVICE_TASK`. Thus, during the process instance migration, the properties of the job (like - `bpmnProcessId`, `processDefinitionVersion`, `processDefinitionKey`, and `elementId`) did not get updated as they should have.\n To rectify this, a new `JobIntent` `MIGRATED` was introduced. Furthermore, changes were made to the `ProcessInstanceMigration` command processor: for each child instance, a `ProcessInstance:ELEMENT_MIGRATED` event is appended. If this child is of type `SERVICE_TASK`, a `Job:MIGRATED` event is also appended. This ensures that all necessary properties are updated leading to successful migration of service task instances and jobs.\n With these fixes, users can now successfully migrate process instances, and properly use all job commands on these migrated instances. Migration is seamless and all properties of the jobs are updated appropriately.\n"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15063",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Introduce new compensation subscription record",
+    "releaseNoteText": " Previously, the system did not have a record for compensation events. As a result, users were unable to perform important actions like finding completed activities with compensation handlers and tracking the handler's state.\n This issue was caused by a lack of support in the system for managing lifecycle states linked to compensation events. This was due to the absence of related functionality and data records within the core engineering of the software.\n A new record for compensation events was introduced, along with lifecycle states for created, triggered, completed, and deleted records. This record also includes relevant data points, such as the tenant id, process instance key, and the element id of activity with a compensation handler, among others.\n Now, users can effectively track and manage compensation events within the system. Activities with compensation handlers can be easily retrieved and the state of these handlers can also be tracked. This new update enhances the overall functionality of tracking process instances and related events."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15034",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Add Job Update Timeout intents",
+    "releaseNoteText": "Users were unable to update the timeout for jobs in the system in the past. This resulted in the inability to extend or shorten the allocated timeframe for existing job tasks.\nThe `JobIntent` class lacked the necessary commands, specifically `UPDATE_TIMEOUT`, to change job deadline timings. When these commands were called, the system defaulted to returning a `NOT_FOUND` rejection. Additionally, job deadline modifications were not being handled correctly in the `JOB_DEADLINES` ColumnFamily, as the existing entry for a job could not be updated due to the deadline-jockey key setup.\nAn `UPDATE_TIMEOUT` command was introduced to the `JobIntent` class alongside the `TIMEOUT_UPDATED` event. The `UPDATE_TIMEOUT` command searches for the job in the state and its deadline. The `TIMEOUT_UPDATED` event modifies the deadline in the state and ensures the `JOB_DEADLINES` ColumnFamily is updated properly, by removing the existing entry for a job and inserting a new value.\nUsers are now able to successfully extend or decrease the timeout for jobs within the system. The deadline update is also appropriately captured and managed in the `JOB_DEADLINES` ColumnFamily."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14967",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "I can execute a process with a compensation end event",
+    "releaseNoteText": " In the past, users could deploy a process with a compensation end event; however, executing the process was not possible, affecting the workflow capabilities in some instances.\n The inability to execute was due to the oversight of the invocation of compensation handlers in the process flow.\n A solution has been implemented to enable process execution that contains a compensation end event. Adjustments were made to ensure that the compensation end event is activated and completed, along with the correct event records having the `COMPENSATION` event type.\n Now, users can not only deploy but also execute a process that includes a compensation end event. This execution makes it possible to complete a process instance and handles event types appropriately."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14965",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "I can execute a process with an intermediate compensation throw event",
+    "releaseNoteText": "Previously, users were able to deploy a process with a compensation intermediate throw event, but they could not fully execute the process because the system was bypassing the invocation of compensation handlers. \nThis was because the logic in the system was such that it didn't support the activation and completion of the compensation intermediate throw event. The issue was the records for the compensation intermediate throw event did not have the event type 'COMPENSATION'. \nThis issue was addressed by implementing the appropriate logic to support the activation and completion of the compensation intermediate throw event. Additionally, the event type 'COMPENSATION' was added to the records for the compensation intermediate throw event.\nNow, users can execute fully a process that contains a compensation intermediate throw event. The system activates and completes the event and the event type 'COMPENSATION' is correctly assigned."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14944",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "The record for a compensation event has the correct event type",
+    "releaseNoteText": " \nUsers were unable to differentiate compensation events from other BPMN process events as all events related to a BPMN compensation event did not carry their distinct event type. \n \nThe `bpmnEventType` field of events of the value type `ProcessInstance` was not configured to reflect the execution of compensation events. The required event type `COMPENSATION` was not previously introduced into the system.\n \nA new event type, `COMPENSATION`, was introduced into the system. This type was applied to all events related to a BPMN compensation event, which includes compensation intermediate throwing events, compensation end events, compensation boundary events, and compensation start events.\n \nUsers can now properly distinguish compensation events from other events in a BPMN process. Every event related to a BPMN compensation event currently carries the 'COMPENSATION' event type."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14943",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "I can deploy a process with BPMN compensation event subprocesses",
+    "releaseNoteText": " Users were unable to deploy a process with BPMN compensation event subprocesses due to current validation rules, limiting their execution of such processes.\n This issue occurred because the system's validation rules didn't permit compensation start events within event subprocesses and these compensation event subprocesses had to be within an embedded subprocess but were not allowed on the process level. \n The validation rules were duly adjusted to allow compensation start events within event subprocesses and permit compensation event subprocesses to reside within an embedded subprocess, while maintaining the restriction at the process level.\n Users are now able to deploy and execute processes with BPMN compensation event subprocesses efficiently, given that these fulfill the revised validation rules."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14942",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "I can deploy a process with BPMN compensation events",
+    "releaseNoteText": " Users were previously unable to deploy a process with BPMN compensation events due to strict validation rules. The system would not permit the deployment process, restricting pivotal functions. \n The cause of the issue was the extreme tightness of the validation rules which did not allow BPMN elements—like the compensation intermediate throwing event, compensation end event, compensation boundary event, or activity with compensation marker—to be included in the procedure. Other restrictions, including ones concerning sequence flows and activities further compounded the issue.\n The validation rules have now been radically amended. The update has made allowance for the mentioned BPMN elements while maintaining some restrictions to maintain system integrity. These restrictions, focused on sequence flows, activities carrying compensation markers and boundaries, and compensation intermediate throwing or end events, are integral to the system structure.\n As a result of this fix, users are now able to deploy a process with BPMN compensation events unrestrictedly. This increased freedom allows for greater flexibility and functionality within the system."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14939",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "I can model a process with compensation events via BPMN model API",
+    "releaseNoteText": " Previously, creating a process via a builder with compensation events was verbose and involved a complicated, unintuitive procedure. \n This was due to the BPMN model API lacking a smooth, easy-to-use builder for test cases related to compensation events, resulting in a clunky user experience. \n We improved the user experience by enhancing the design of the builder in the BPMN model API. We made it smoother and more intuitive for creating test cases involving compensation events. \n Now, users can model processes with compensation events in a much easier and less verbose manner using the BPMN model API, improving the usability of test case creation for compensation events."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14858",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Add support to Java client for Form deletion",
+    "releaseNoteText": "\nThe Java client was unable to delete Forms.\nThe Java client interface was initially designed without a form deletion feature. This lack of feature was due to a prior technical decision to not include this functionality.\nA form deletion function was added into the Java client's interface. This technical update was completed after resolving issue #14272, which was initially blocking the addition of this feature.\nJava client users can now seamlessly delete forms through the interface."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14701",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Enhancements",
+    "title": "Replace Dependabot with Renovate",
+    "releaseNoteText": " Our code repository had both Dependabot and Renovate managing dependency updates, causing redundancy as Renovate covered all our use cases, unlike Dependabot.\n The project configuration had incorporated both Renovate and Dependabot for dependency management, which was unnecessary and could lead to confusion.\n We updated the Renovate configuration file to cover Maven and Docker updates, removed Dependabot tool, and also updated related GitHub actions and commitlint.config.js adjustments.\n Now only Renovate is managing all dependency updates in the code repository, making the dependency update process more streamlined and efficient. The superfluous Dependabot GitHub-related actions and elements from commitlint.config.js were cleaned up."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15220",
+    "component": "Zeebe",
+    "subcomponent": "Broker",
+    "context": "Bug Fixes",
+    "title": "Failed or cancelled topology change operations block further operations",
+    "releaseNoteText": "Previously, the system had blocked any further operations in the event of a failed or cancelled topology change operation. \nThis was due to the 'onGoingTopologyChangeOperation' flag in the 'ClusterTopologyManager' only being set back to 'false' upon completion of an operation. It was not reset to 'false' if a change was cancelled or an operation failed to initialize. \nThe issue was addressed on the product engineering side by adding code to reset the 'onGoingTopologyChangeOperation' flag to 'false' either when an operation is completed or when it fails or is cancelled. \nThe system now permits new operations to start irrespective of whether previous operations failed or were cancelled."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15219",
+    "component": "Zeebe",
+    "subcomponent": "Broker",
+    "context": "Bug Fixes",
+    "title": "Topology received via gossip can bypass merge with locally persisted topology",
+    "releaseNoteText": "Previously, brokers could lose information about previously applied operations. This occurred when a new topology was received over gossip before the 'TopologyInitializer' had finished, resulting in the received topology being persisted without merging with the local one.\nThe local topology was uninitialized when the gossip-based new topology arrived. The system was designed not to overwrite an uninitialized topology with updates received via gossip, but there was an exception with the 'GossipInitializer'. \nIn order to preserve details of applied operations, code was updated such that the local topology would always be prepped for merging before accepting a new topology from gossip. \nNow, brokers maintain a correct account of all applied operations irrespective of the timing of new topology arrival since it merges correctly with the local topology, which avoids data loss and improves the system's overall reliability."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14509",
+    "component": "Zeebe",
+    "subcomponent": "Broker",
+    "context": "Bug Fixes",
+    "title": "Potential inconsistency in raft after restoring from a backup",
+    "releaseNoteText": " \nPreviously, restoring from a backup led to potential inconsistency in some partitions, producing an IllegalStateException error. The issue resulted in increased disk usage as no new snapshots could be taken until the term increases to a higher value than before the backup, and, as a result, logs were not compacted.\n \nThe root of this issue was the reset \"term\" after restoring from a backup. When a node was not aware of the new leader after the restore, it started a new election, resulting in inconsistency.\n \nA technical fix was applied through a Pull Request which addressed this issue by ensuring the term does not reset after restoring from a backup, allowing raft to continue working in all scenarios.\n \nNow, there is no potential inconsistency after restoring from backup. Raft can operate as expected in all scenarios. Snapshots can be taken after restoration, thus preventing log pile-up and high disk usage."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15445",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Verify correct behaviour of input mappings after bump to FEEL 1.17.3",
+    "releaseNoteText": "Previously, users experienced issues with special characters inside input mappings being incorrectly escaped. \nThis was due to a bug in the FEEL 1.17.2 which did not correctly handle the escaping of special characters. \nThe product was updated to use FEEL 1.17.3, which resolved the issue related to escaping special characters.\nNow, users can successfully use special characters inside input mappings without them being escaped incorrectly."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15381",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "NullPointerException when join is retried after a restart",
+    "releaseNoteText": "During dynamic scaling tests, the system experienced an error and the partition join process got stuck whenever a join was retried after a system restart. This also led to a NullPointerException in the system.\nThe issue was caused by a join request from Server B to the cluster leader. When the leader committed the configuration in the existing members, Server B received the configuration but not the commit information. This configuration was kept in memory. When Server B was restarted, it re-sent the join request. The leader, expecting Server B to have the configuration, didn't send the configuration again which resulted in a NullPointerException. \nTwo fixes were applied to address this issue. The first fix ensured the leader would send the configuration again in case of a duplicate join request, while also handling the NullPointerException in the follower by rejecting the AppendRequest. The second, more permanent fix involved including the configurationIndex in the AppendResponse, so the leader can resend the configuration if required.\nThe system can now handle join requests after a system restart without interruption. Both the leader and the follower handle these requests efficiently without any NullPointerExceptions occurring. The partition joining process is not disrupted due to system restarts."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15343",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "IT timeout due to `ScaleResiliencyTest.ScaleDown`",
+    "releaseNoteText": " \nUsers experienced IT timeout issues while attempting to merge changes due to the `ScaleResiliencyTest.ScaleDown`, which caused the operation to be cancelled and the system did not allow any further operation.\n \nThe underlying issue was that Broker-2 was attempting to leave partition 2 but was unable to due to the unavailability of Broker-1. Since Broker-1 was committed that first part of the joint consensus and restarted, this left partition 2 in Broker-2 unstarted. This caused Broker-0, the leader, to commit the second part of the joint consensus before Broker-2 was ready, causing Broker-2 to indefinitely wait for partition-2 to be ready.\n \nThis was fixed by ensuring that Broker-2 becomes ready before Broker-1 is restarted. This way, the second part of joint consensus isn't committed before Broker-2 is fully ready.\n \nNow, when users attempt to merge changes, timeouts are no longer an issue, and operations can be performed without being cancelled prematurely. The system's operations run smoothly without unexpectedly waiting for partitions to be ready, boosting the efficiency of the operations."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15194",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Form events are not replayed",
+    "releaseNoteText": "Consequence:\nIn the past, users experienced potential loss of deployed forms, resulting in incidents raised at the User Task indicating that the form could not be found. This bug could reoccur, creating interruptions in their workflow.\nCause:\nThe underlying technical issue was that form events were not properly replayed, leading to them being missed and not added to the state. This could result in the loss of deployed forms in versions 8.3 and 8.4.0-alpha1.\nFix:\nA technical solution was implemented to correct the form event replay mechanism to ensure no form events were missed, helping to prevent the loss of deployed forms. \nResult:\nNow, form deployment operates seamlessly, with no incidents of missing forms at the User Task. Users can conduct their tasks effectively without the need to redeploy the forms, enhancing the system's reliability."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15188",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Could not update new leader for partition",
+    "releaseNoteText": "Partition leader updates were unable to be successfully executed, thereby affecting the system's partition management. \nThe system was trying to replace a partition leader during a term transition but encountered null value instead of the expected current leader term value, leading to a technical impasse.\nThe code was updated to enhance error handling and ensure that non-null values for current leader terms would be presented during the transition of partition leaders, preventing any null encounters.\nA partition leader update now successfully completes with the current leader term presenting a non-null value, thereby ensuring seamless partition management."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15047",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "8.3.x release benchmark - Authorization data unavailable: The Token can't be used before xxx",
+    "releaseNoteText": "\nUsers experienced an error \"Authorization data unavailable: The Token can't be used before xxx\", which resulted in a dead partition of the service, negatively affecting performance.\nThere was a clock synchronisation discrepancy between the gateway and broker nodes, specifically regarding the 'issuedAt' claim of the JWT token. As both were set to 'Instant.now()', if the token was verified even half a second earlier than it was set, the JWT library would throw an error. \nThe 'issuedAt' claim, which was irrelevant in the context of unsigned JWT tokens, was removed. Further, the JWT validation at the time of decoding was also removed and custom validation was done to ensure the 'authorized_tenants' JWT claim is present.\nThe \"Authorization data unavailable: The Token can't be used before xxx\" error no longer occurs, improving the stability of the service. The JWT tokens are now only validated for 'authorised_tenants' claim, ensuring security and reducing unnecessary synchronisation issues."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14931",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "A deployed form is not mentioned in the `DeploymentEventImpl.toString()`",
+    "releaseNoteText": "Users previously observed that when deploying a form with the Java client, the output of the `DeploymentEvent` failed to print the form.\nThe underlying cause was a lack in the `DeploymentEventImpl.toString()` method to include deployed forms.\nWe modified the `DeploymentEventImpl.toString()` to now include the information regarding deployed forms.\nCurrently, when users deploy a form using the Java client, the `DeploymentEvent` appropriately prints out the deployed forms."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14924",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "IOPS doubled in CW44",
+    "releaseNoteText": " Users observed a sudden and intermittent increase of IOPS (input/output operations per second) on certain nodes during CW44 benchmarks, rising from approximately 4000 IOPS to about 8000 IOPS. The inconsistency in performance metrics made it difficult to fully understand and optimize system behavior.\n After an investigation, it was found that the system was erroneously counting some metrics twice, causing an inflated portrayal of IOPS. The duplication occurred due to the presence of two different containers for fetching metrics data and two separate associated services for monitoring.\n The issue was traced and recognized as an echo of a previous bug related to CPU metrics, which granted familiarity with the situation and a probable path towards resolution. A technical fix was initiated to prevent the system from counting the same metrics repetitively.\n Users can now observe an accurate depiction of IOPS on their nodes. The fix removes ambiguity in system metrics, enabling a clearer understanding of the system's behaviour and performance, and aiding in optimization efforts.\n"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14884",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Improve resilience of remote stream restart",
+    "releaseNoteText": "The system naively asked all members to restart their streams whenever a new member was added, causing unnecessary noise and potential failure for the streams to be recognized by the brokers. \nThe problem was due to the system's indiscriminate approach to triggering stream restarts alongside an absence of failure retry mechanisms. \nThe code was fine-tuned to ensure stream restart requests are sent only to gateways. Moreover, a retry mechanism was introduced, which would repeat the restart attempt (with a programmed delay) until the request eventually succeeds.\nNow, only gateways receive requests for stream restarts, and in case of a failure, the system retries the request until it's successful, optimizing the system's resilience and efficiency."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14814",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Leaked message subscriptions cause constant processing load",
+    "releaseNoteText": " With Zeebe 8.2.12 Cluster, load remained constant due to the persistent processing of \"COMMAND PROCESS_MESSAGE_SUBSCRIPTION CORRELATE\" and corresponding rejection commands. This led to the constant exertion of processing load on the cluster. \n The issue occurred due to an anomaly in the partition wherein the subscription column family contained a subscription with `correlating=true` in one partition but not the other. Theorized as a result of a lost `MESSAGE_SUBSCRIPTION/CORRELATE` or `MESSAGE_SUBSCRIPTION/DELETE` command, prompting a recurring loop of resend attempts and consequent rejections.\n Instead of focusing on just preventing a recurrence, the team sought to find a way to recover from the broken state. Possible improvements include not rejecting a `MESSAGE_SUBSCRIPTION/REJECT` command, not writing `COMMAND_REJECTION`s for internal commands, and effectively cleaning up subscription when the receiving partition rejects it. \n With these improvements implemented, the software is now effective in recovering from a faulty state, preventing potential processing load build-ups. The system also refrains from writing irrelevant `COMMAND_REJECTION` and better handles `MESSAGE_SUBSCRIPTION/REJECT` commands, offering a more efficient response to issues with internal commands."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14699",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "IllegalStateException: found snapshot 0. A previous snapshot is most likely corrupted",
+    "releaseNoteText": " \nDuring the startup of the broker, users encountered a problem where IllegalStateException: found snapshot 0, was present. This could typically indicate some corruption. As a result, the broker was unable to reach a bootloop which was causing headache for users who attempted to boot their systems.\n \nThe underlying issue turned out to be, most likely, a corruption in snapshots. The problematic snapshot appeared during the initialization of the RaftContext. During the creation of the snapshot, the broker was shutting down, and the system integration check failed to function properly after the shut down. This led to the snapshot being moved to the Raft thread instead, which led to the corruption.\n \nThe issue was addressed by introducing a proper synchronization process where a persist operation must first be completed before any other action can be taken on the Raft thread. This prevented the half-complete snapshot from being pushed to the Raft. In addition, the checksum file was also corrected to prevent the snapshot from being improperly flagged as corrupted.\nNow, the broker no longer gets stuck in a bootloop due to snapshot corruption. It properly waits for the persist operation to complete before moving on to the next processes. Thus, data integrity is maintained, and users are able to boot their system without disruption."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/14458",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": " NullPointerException: Cannot invoke `PartitionContext.getComponentHealthMonitor()` because `this.context` is null ",
+    "releaseNoteText": " During the system shutdown process, a NullPointerException (NPE) was triggered intermittently which resulted in an undesired interruption. This was due to the health check service trying to query the health of a Zeebe partition when it was null.\n The system failed to check the availability of the partition context before invoking the `PartitionContext.getComponentHealthMonitor()` method. Therefore, when the partition context was null during the shutdown process, the system encountered a NullPointerException. \n The system was modified to appropriately check for a null context before calling the `PartitionContext.getComponentHealthMonitor()` method. If the context is identified as null, the system now returns an unhealthy status. This avoids the NullPointerException from occurring.\n On completion of the fix, the system is now modified to handle shutdown procedures more efficiently, preventing unnecessary interruptions. Now, during shutdown, if a null context is identified, the system promptly returns an unhealthy status, preventing NullPointerExceptions and ensuring robustness during shutdown."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/13870",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Scheduled tasks should avoid overloading the streamprocessor",
+    "releaseNoteText": "Consequence:\nPreviously, scheduled tasks such as `JobTimeoutTrigger` that periodically appended commands to the log stream could overload the stream processor under certain conditions. If the stream processor was blocked, these tasks repeatedly appended the same command, leading to performance degradation.\nCause:\nThe scheduled tasks did not have a mechanism to avoid appending the same command multiple times. As a result, these tasks could potentially load the stream processor with redundant commands.\nFix:\nThe issue was addressed by implementing cache controls for scheduled tasks, allowing them to remember recently append commands. As a result, repeated commands could be avoided hence mitigating the impact on the stream processor.\nResult:\nWith this fix applied, scheduled tasks no longer overload the stream processor with redundant commands. This capability helps improve overall system performance and reduce potential blockages within the stream processor."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/8938",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Bug Fixes",
+    "title": "Feel error are causing bad user experiences",
+    "releaseNoteText": "Users experienced difficulties when creating feel expressions. The system was creating an instance, but this was causing an incident with a confusing message, making it very hard to troubleshoot and understand what was happening.\nThe main issue was linked to the evaluation of feel expressions. When an expression failed, the message in the incident did not clearly indicate the source of the problem. This occurred because no function was found with the given name and parameters, a detail that was only visible from the Google console log.\nThe system was updated to improve incident message clarity when feel expression evaluations fail. The new version of the FEEL engine provides not only evaluation results, but also potential warnings. These warnings are now appended to the incident message to facilitate problem resolution.\nNow, if a feel expression evaluation fails, the incident messages created are more clear and helpful as they contain potential warnings from the evaluation, leading to a better, less frustrating user experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/issues/15287",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Documentation",
+    "title": "Add missing steps to developer handbook",
+    "releaseNoteText": " Previously, developers were unable to correctly add new record types due to certain steps being missing from the developer handbook. This absence resulted in bug reports and failed continuous integration (CI) tests.\n The developer handbook did not include the necessary steps such as adding a new value type in the engine's supported value types to ensure event replay, as well as supporting the new value type in Zeebe Process Test (ZPT).\n Updates were made to the developer handbook incorporating the missing steps to facilitate the correct addition of new record types.\n The developer handbook now contains complete instructions for adding new record types, leading to smoother development processes and a reduction in bug reports and failed CI tests."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/pull/15444",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Merged Pull Requests",
+    "title": "fix(raft): resend configuration to members that lost their configuration",
+    "releaseNoteText": " Before the fix, when a leader initially accepted the current configuration but then lost it due to dataloss or other reasons, the leader's view of the member's configuration index remained outdated. The leader had an incorrect understanding of the member's configuration status, thinking it had a configuration index when it actually did not have one. This could only be corrected by restarting the leader or creating a new configuration.\n The underlying flaw was that leaders would only update the configuration index when they received a successful configuration response. This left room for inconsistencies when there were disruptions or failures in the communication, leading to the leader having an outdated perception of the member's configuration index.\n Two main changes were implemented. Firstly, the configuration index was integrated into the append response, allowing the leader to update the configuration index when this response was received. Secondly, followers can now reject append requests if there is no current configuration, signalling to the leader that a configuration request is required.\n Now, leaders accurately track members' configuration status and can update wrongly perceived configuration indexes. Followers can also reflect their actual configuration status back to the leaders. This change ensures the system can accurately monitor and respond to configuration changes and disruptions, improving the consistency and reliability of the system."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/pull/15341",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Merged Pull Requests",
+    "title": "fix: set correct generation",
+    "releaseNoteText": "Users experienced issues with incorrect generation set, as Zeebe software was not working as expected. \nThis defect was the result of variables being incorrectly referenced in the initial coding.\nThe developers adjusted the code to point to the right variables to correct the misfired generations.\nAfter this fix, Zeebe's generation settings are working properly, resulting in accurate and reliable process generation."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/pull/15340",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Merged Pull Requests",
+    "title": "Calculate the right versions",
+    "releaseNoteText": "Previously, users encountered an issue where the version calculation was not functioning properly. This presented a flaw as accurate version calculation was not available.\nThis was triggered by a breakdown in the patch versions. The original design was missing a vital component for version calculation which led to the flaw.\nThe bug was resolved by reintroducing the version calculation part. By restoring this piece and not completely refactoring the system, the issue was fixed.\nNow, version calculation functions correctly. The users are able to calculate the right versions which improves the usability of the software."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/pull/15317",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Merged Pull Requests",
+    "title": "refactor: allow easy disabling via secret removal",
+    "releaseNoteText": "Disabling TCC used to be difficult for users as it wasn't simply controlled by the presence of the secret.\nThis was due to the fact that the system didn't check the existence of the secret to determine whether or not to enable TCC functionality.\nA refactor was carried out to enhance the system, enabling it to easily disable TCC simply by removing the secret.\nUsers can now disable TCC with ease by just removing the associated secret."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/pull/15201",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Merged Pull Requests",
+    "title": "Replay deployed forms",
+    "releaseNoteText": "Users were previously unable to replay deployed forms, potentially causing inconsistencies in the intended function and behavior of the system.\nThe Engine records were not configured to support the replay of 'Form' records.\nThe required code changes were implemented to include 'Form' records in the supported Engine records, ensuring that they can be replayed. An additional unit test was also developed to prevent further regression.\nNow, users can replay deployed forms, ensuring consistency and performance of the system as it was designed. The system now offers full support for the replay of 'Form' records."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/zeebe/pull/14217",
+    "component": "Zeebe",
+    "subcomponent": "Misc",
+    "context": "Merged Pull Requests",
+    "title": "fix(clients/go): client does not retry on permanent errors",
+    "releaseNoteText": " Previously, commands would not stop on permanent errors, regardless of the behavior of the credential provider. This potentially led to harmful system behaviour as processes were continuously retrying even when an error was permanent.\n The issue was caused by the system's non-discriminatory approach to errors. Permanent errors were not appropriately identified as non-retryable within the system's engineering, causing the system to default to the retry predicate.\n We made adjustments to ensure commands stop on permanent errors. Now, the software correctly recognizes permanent errors as non-retryable and ceases to continue retrying upon encountering such errors.\n Currently, when a permanent error occurs, the software correctly identifies it and halts the commands involved. It will not default to the retry predicate for these types of errors, resulting in a more controlled and efficient error management."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/6023",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: enable process instance migration in UI",
+    "releaseNoteText": "Previously, process instance migration was not feasible through the User Interface.\n  \nThis issue happened due to the lack of a feature in the UI for managing the process instance migration.\nA feature that enables process instance migration in the user interface was added.\nThe Users can now migrate process instances directly from the User Interface."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/6014",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): be-5704-pi-migration-test",
+    "releaseNoteText": "Post-PI migration, users previously faced issues with importing migrated elements including process instances, flow nodes, and variables. \nThe problem resided within the back-end engineering of the product, specifically the importer and process instance operation handler were not properly aligned with the new migration changes.\nThe team addressed these issues by updating the importer to correctly handle migrated elements, and by adding a new handler for the MIGRATE_PROCESS_INSTANCE operation. In addition, comprehensive integration tests were introduced to ensure a robust solution.\nWith these changes now implemented, users can successfully import migrated elements post-PI migration. This correction maintains smooth process operations and ensures system stability is upheld."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5972",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): add migration entry to operations panel",
+    "releaseNoteText": " Previously, users could not easily track migration operations from the operations panel, because while the operation entries were shown, they lacked a distinct icon, and did not link directly to related process instances.\n  \n The issue resulted from missing software components in the original design. The operations panel was not configured to display a specific icon for migration operations and did not contain active process instance filters linked to a particular operation id. \n The developers met all the acceptance criteria detailed in the issue. They added a 'Migrate' icon to indicate migration operations and created a link to process instances filters, where a filter is active for the operation id. To avoid accidentally turning on this feature prematurely, the devs set the feature flags to false. \n Now, when users open the operations panel, they see a unique migrate icon for each migration operation. They can click on a link which directly leads to the process instances filters, where they can filter by operation id."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5973",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): clean up opensearch dao inheritence and dependency injection",
+    "releaseNoteText": " Before this fix, the software was using autowired for all dependencies which led to a cluster of unnecessary dependencies. Additionally, the base class OpensearchDao was unnecessary and this led to a lack of clarity in the system architecture. \n The issue was primarily caused by the use of autowired dependency injection for all dependencies instead of just using it for those dependencies that were necessary. Moreover, the persistence of an unneeded base class (OpensearchDao) and the undescriptive naming of the OpensearchPageableDao class contributed to the complexity and lack of clarity in the architecture.\n Dependency injection was used for all necessary dependencies, removing the reliance on autowired. The unneeded base class, OpensearchDao, was removed. The OpensearchPageableDao was renamed to the more declarative OpensearchSearchableDao. Finally, the operate properties dependency was moved to the specific dao that was using it, instead of using a base class.\n Now, dependencies are injected in a more logical and clear way and no unnecessary dependencies are present. The removal of the extra base class and the renaming of the OpensearchSearchableDao lead to a more understandable and streamlined architecture. The software currently operates more efficiently due to the specific placement of the operate properties dependency."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5969",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feauture-flagged): disable migrate button for called process instances",
+    "releaseNoteText": " \nIn the past, users were able to select process instances that are called by a parent instance, which led to them seeing an active migrate button even when it was inappropriate.\n \nThis issue was caused by a lack of programming logic to identify and disable the migrate button for process instances called by a parent instance.\n \nA feature flag was implemented to disable the migrate button for process instances that are called by a parent instance. Test cases and logic related to this feature were also updated accordingly.\n \nNow, when users select process instances that are called by a parent instance, the migrate button is disabled, preventing any unintended migrations. The system also displays a tooltip to inform users about the button's disabled status."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5961",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): add target flow node selection to migration view",
+    "releaseNoteText": "Users were unable to observe a highlighted target flow node in the target diagram when clicking on a correlated row in the bottom panel. This made navigation and correlation between source and target flow nodes difficult, especially in cases where multiple source nodes were mapped to the same target node. \nThe product interface lacked a feature to map and highlight corresponding target flow nodes when a row in the bottom panel was selected. This was due to the absence of acceptance criteria implementation related to flow node mapping and highlighting in the original programming of the system.\nThe product was enhanced by implementing the acceptance criteria specified in issue #5732. This was accomplished by creating programming functionality that maps and visually highlights corresponding target flow nodes when rows in the bottom panel are selected.\nUsers are now able to see highlighted target flow nodes in the target diagram when they click on a row in the bottom panel. If multiple source nodes map to the same target node, all corresponding source nodes are highlighted, allowing for an easy understanding of the node mapping relationships."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5951",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): Create batch operation for process instance migration",
+    "releaseNoteText": "Previously, users experienced a limited functionality of process instance migration as it lacked the ability to perform batch operations.\nThis was due to the absence of an important enumeration value which was crucial for enabling this feature in the backend system.\nWe addressed this issue by adding the missing enumeration value to the backend system.\nNow, users can perform batch operations during process instance migration, vastly improving the operability and efficiency of their workflows."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5952",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): highlight instances in migration summary view",
+    "releaseNoteText": " Before the fix, the system failed to highlight the number of active instances, incidents, and expected migrated instances in the migration summary view. \n The system did not have a feature to show green badges for active instances, red badges for incidents, and blue badges for expected migrated instances, making it harder to understand the status at glance. Additionally, the feature flags were not set to false which held certain features back.\n We developed an upgrade to the system to include green badges for active instances, red badges for the number of incidents, and blue badges for the number of expected migrated instances in the migration summary view. We also set the feature flags to false. \n Now, the system displays green, red, and blue badges in the migration summary view to quickly reflect the number of active instances, incidents, and expected migrated instances respectively."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5953",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): Implement OpensearchDecisionInstanceDao",
+    "releaseNoteText": "The Users were not able to use the OpensearchDecisionInstanceDao due to its absence in the program's backend. \nThe The backend had not been programmed to implement OpensearchDecisionInstanceDao. \nThe The OpensearchDecisionInstanceDao was implemented in the backend, and some minor refactoring was performed.\nThe Now users can utilize the OpensearchDecisionInstanceDao as it is present and functional in the application's backend."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5950",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): add OpensearchDecisionRequirementsDao and OpensearchDecisionDefinitionDao",
+    "releaseNoteText": " Previously, the system lacked support for the integration with OpenSearch since `OpensearchDecisionRequirementsDao` and `OpensearchDecisionDefinitionDao` were missing.\n This was because `OpensearchDecisionRequirementsDao` and `OpensearchDecisionDefinitionDao` had not been implemented in the back end of the system.\n The issue was fixed by adding the `OpensearchDecisionRequirementsDao` and `OpensearchDecisionDefinitionDao` to the backend system.\n Now, the system properly supports OpenSearch integrations, facilitating better search decision requirements and definitions.\n"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5942",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: OpensearchFlowNodeStatisticsDao",
+    "releaseNoteText": "Prior to the fix, there wasn't a dedicated Dao for acquiring FlowNode statistics in Opensearch, leading to potential inefficiencies and complexities in data retrieval.\nThe system lacked an implementation of the OpensearchFlowNodeStatisticsDao, let alone its extraction from the OpensearchPageableDao.\nDevelopers introduced the OpensearchFlowNodeStatisticsDao, and extracted the OpensearchPageableDao.\nNow, the system includes a streamlined data acquisition layer for FlowNode statistics through the OpensearchFlowNodeStatisticsDao feature. This enhances data retrieval performance and reduces complexity."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5931",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): request batch process on migration confirmation",
+    "releaseNoteText": " Users were not able to trigger a batch process migration on the Operate backend through an API request, and subsequently navigate to an instance list view with target process and version selected.\n The feature to request batch process on migration confirmation was not implemented in the system. As a result, acceptance criteria as defined in issue #5738 were not met.\n The acceptance criteria were implemented. An API call was set to be sent to the Operate backend to trigger migration, with navigation abilities built-in to allow users to move to the instance list view with the desired process and version selected.\n Users can now trigger a migration upon confirmation, and easily navigate to an instance list view with their desired process and version. Global environment variables `IS_INSTANCE_MIGRATION_ENABLED` and `IS_INSTANCE_MIGRATION_API_MOCKED` should be set to false for the feature to work correctly."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5940",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): Create batch operation for process instance migration",
+    "releaseNoteText": "Users were unable to perform batch operations for process instance migration due to an outdated template version, which was hindering efficiency.\nThe backend had an outdated version of the template used for batch operations on process instances. \nThe underlying issue was fixed by updating the template to the latest version. \nNow, users can efficiently execute batch operations for process instance migration."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5898",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): Create batch operation for process instance migration",
+    "releaseNoteText": "Users were unable to perform batch operations for process instance migration, limiting the functionality and efficiency of the system.\nThis was due to the absence of a MIGRATE_PROCESS_INSTANCE operation type in the system architecture.\nThe engineering team added a new operation type, MIGRATE_PROCESS_INSTANCE, and created a model for the migration plan. Integration tests were also added to support this new feature.\nWith this fix implemented, users can now perform batch operations for process instance migration, enhancing the system's utility and performance. The system's reliability is also boosted by the new integration tests."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5900",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): add target element mapping in migration view",
+    "releaseNoteText": " Users were unable to proceed in the target flow nodes without at least one element mapped as the \"Next\" button was disabled in this situation.\n This limitation stemmed from the fact that the previous system iteration allowed only for all service tasks from the target process definition to be shown as targets.\n The code was modified to fulfil the acceptance criteria of showing all service tasks as targets from the target process definition, and disabling the \"Next\" button until at least one element was mapped.\n Users can now see all service tasks as targets from the target process definition and will have the \"Next\" button disabled until at least one element is successfully mapped."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5902",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): implement OpensearchFlowNodeInstanceDao and OpensearchProcessInstanceDao",
+    "releaseNoteText": " Prior to this update, users were unable to utilize the OpensearchFlowNodeInstanceDao and OpensearchProcessInstanceDao functionalities in Camunda Zeebe's backend as they were not implemented.\n The lack of implementation of OpensearchFlowNodeInstanceDao and OpensearchProcessInstanceDao in backend was due to absent features in the software development process.\n The missing functionalities of OpensearchFlowNodeInstanceDao and OpensearchProcessInstanceDao were implemented in the backend along with the addition of unit tests and updated integration tests.\n With the new implementation of OpensearchFlowNodeInstanceDao and OpensearchProcessInstanceDao, users can now experience expanded functionalities in the Camunda Zeebe's backend which is validated by unit and integration tests."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5894",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): implement OpensearchFlowNodeInstanceDao with tests and improve IT coverage",
+    "releaseNoteText": "Apologies for the confusion but the input provided doesn't seem to be a GitHub issue. A GitHub issue usually includes a description of a bug, error, or suggested feature enhancement. Could you please provide a GitHub issue so I could generate a release note?"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5841",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): display summary notification in migration summary page",
+    "releaseNoteText": " Prior to this fix, the migration summary page did not display a summary notification banner on top of the diagrams when `IS_INSTANCE_MIGRATION_ENABLED` was set to false. This led to an inadequate interface experience for users.\n  \n Technical issues were identified in the engineering of the product. The interface was not properly programmed to display the summary notification banner when `IS_INSTANCE_MIGRATION_ENABLED` was set to false.\n A code change was implemented so that the summary notification banner, excluded from the 'resizable' part of the page with the designated process name/versions bolded, is now visible on the migration summary page when `IS_INSTANCE_MIGRATION_ENABLED` is set to false. The changes are backwards compatible with previous versions.\n Now, users see the appropriate notification banner on top of the diagrams on the migration summary page. The page works as expected, enhancing the user interface experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5827",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): highlight target flow node on selection",
+    "releaseNoteText": "Previously, when users clicked on a selectable flow node in the source diagram, the related row in the bottom panel was not highlighted. Also, clicking on a row in the bottom panel did not select the related source flow node in the source diagram. \nThis issue was due to a lack of coordination and response between the different UI elements in the software.\nA feature was implemented that set up a response system in which clicking on a selectable flow node in the source diagram highlighted the related row in the bottom panel and vice versa.\nNow, when you click on a selectable flow node in the source diagram, the related row in the bottom panel gets highlighted. Similarly, clicking a row in the bottom panel selects the related source flow node in the source diagram."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5825",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): show mappable flow nodes in migration mode",
+    "releaseNoteText": "Previously, when users selected a process for mapping, only 'Check payment' and 'Request for payment' were displayed in the mapping table. If the process did not contain service tasks, an error would notify users that there were no flow nodes to map.\nThis issue was caused by the limitation in the implemented acceptance criteria, which only allowed service tasks to be displayed as source flow nodes.\nThe technical fix involved extending the functionality of the process mapping module to handle all flow node types, not just service tasks. The 'IS_INSTANCE_MIGRATION_ENABLED' was also set to false.\nNow, users see all mappable flow nodes in the mapping table when undertaking migration. Furthermore, processes without service tasks no longer cause an error message to appear."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5860",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): implement byKey() on OpensearchVariableDao and add test coverage",
+    "releaseNoteText": "Previously, the OpensearchVariableDao lacked byKey() functionality equivalent to that of Elasticsearch, leading to limitations for users who wished to use this feature.\nFrom an engineering perspective, the byKey() functionality was not implemented for the OpensearchVariableDao, which led to this restriction.\nThe Opensearch's byKey() functionality was developed to mirror Elasticsearch's equivalent, and relevant unit test coverage was added to validate this feature.\nUsers can now utilise the byKey() functionality in OpensearchVariableDao, similar to Elasticsearch, creating a more functional and user-friendly experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5815",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): leave migration mode modal",
+    "releaseNoteText": "Users were constantly presented with a migration mode modal.\nThe IS_INSTANCE_MIGRATION_ENABLED feature flag was incorrectly set to true.\nThis flag was set to false to disable the migration mode modal.\nNow, the migration mode modal no longer appears during the user interaction."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5834",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): display modal on migrate button click",
+    "releaseNoteText": "Previously, users were unable to see a modal when clicking on the migrate button.\nThis was due to the fact that the `IS_INSTANCE_MIGRATION_ENABLED` was not set to false.\nWe have now ensured that `IS_INSTANCE_MIGRATION_ENABLED` is set to false, enabling the display of the modal window.\nNow, when a user clicks on the migrate button, a modal will be displayed correctly.\n"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5856",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(backend): implement OpensearchProcessDefintionDao",
+    "releaseNoteText": "Prior to the fix, the OpensearchProcessDefinitionDao was not implemented which affected certain parts of functionality related to #5586. \nThe implementation for OpensearchProcessDefinitionDao was missing, which made the operation rely on terms of OpensearchDao, causing potential issues with our product's backend engineering.\nWork was done to implement OpensearchProcessDefinitionDao in terms of OpensearchDao. \nWith the implementation of OpensearchProcessDefinitionDao in place, those potential issues related to #5586 should now be resolved, and the backend functionality should now behave as expected."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5807",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(feature-flagged): add exit migration button",
+    "releaseNoteText": "Previously, users could not manually perform an exit migration due to the absence of an \"Exit Migration\" button.\nThis issue was due to the 'IS_INSTANCE_MIGRATION_ENABLED' flag being consistently set to 'True', which didn't allow users to opt out of migration.\nA fix was made that added an \"Exit Migration\" button, and the 'IS_INSTANCE_MIGRATION_ENABLED' flag was set to 'False' within the system.\nNow, users can manually opt out of migration by clicking on the \"Exit Migration\" button. This button works when the 'IS_INSTANCE_MIGRATION_ENABLED' flag is set to 'False'."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/6047",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): fix resource based permissions on SaaS",
+    "releaseNoteText": "Resource-based permissions on the SaaS backend used to fail, causing accessibility issues for certain user roles. \nThis was due to an error in the resource permissioning protocol within our SaaS backend infrastructure. \nWe've corrected this error by revising the SaaS resource permission codes to ensure accurate permission allocation based on the assigned user roles.\nNow, resource-based permissions work flawlessly in the SaaS backend allowing users to access the resources based on their roles."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/6019",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): different fixes to continue after data loss",
+    "releaseNoteText": "Operate's system became inoperable if there was random data loss of Operate/Zeebe indices/aliases from Elastic.\nThe system was not checking for the presence of all aliases at startup, it was using update queries which failed in the event of data loss, it didn't account for missing parents in post-import processes, and it was not set up to safely ignore and log warnings for missing parent nodes in an import hierarchy.\nThese issues were rectified with a number of changes. The system now checks for the presence of all aliases at startup and re-adds any if they are missing. Upsert queries are used instead of update queries to safely handle instances of data loss. A flag was added to ignore errors during incident post processing. And finally, the system was updated to ignore missing parent process instances and flow node instances, allow the import to continue, and log warnings about missing data. \nPost this fix, Operate is resilient to random data loss and continues running smoothly even if Operate/Zeebe indices/aliases are deleted from Elastic. Error handling has been improved to log warnings and continue operation in the event of missing parent instances in import processes."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/6025",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): fix initialization of PermissionsService",
+    "releaseNoteText": "The system was having an issue with the initialization of the PermissionsService that was impacting users.\nThe cause of the problem was traced back to insufficient callbacks for Identity parameters in the backend code.\nThe engineers added more callbacks for the Identity parameters in the backend system.\nAs a result of this fix, the PermissionsService initializes correctly and is operational in the present system state."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5993",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): Implement index lifecycle for Opensearch (ISM) #5612",
+    "releaseNoteText": "Previously, users experienced suboptimal performance with Opensearch due to the lack of an index lifecycle management (ISM) strategy. \nThe system had not implemented an ISM strategy in the backend for Opensearch, leading to inefficient indexing and potentially reduced search performance.\nAn index lifecycle was implemented for Opensearch, optimizing the system's ability to manage and store data effectively.\nUsers of the system now experience improved performance due to the efficient management and storage of Opensearch indexes. The system maintains faster and more reliable search results."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5991",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): fix race condition where DatabaseInfo bean is accessed before fully constructed",
+    "releaseNoteText": "Previously, users could experience a Null Pointer Exception (NPE) in the SessionService's postConstruct method. This issue would only occur if a scheduled deletion of expired session ids led to a static method call to DatabaseInfo.getCurrent() before the DatabaseInfo bean had been fully created.\nThis issue was caused by inconsistencies in bean creation order. Because the session id cleanup task runs during the SessionService bean's construction and makes a static method call to DatabaseInfo, there was a possibility that DatabaseInfo had not been fully instantiated. This led to an NPE in getCurrent(), which assumed the applicationContext was already set.\nThis problem was rectified by changing the bean creation order to ensure DatabaseInfo is fully instantiated before any implementations of AbstractIndexDescriptor. An NPE guard was added to DatabaseInfo.isCurrent() along with a log to indicate if this function is called before applicationContext is set. Additionally, a dependency was added in AbstractIndexDescriptor (through Autowired) to force full creation of DatabaseInfo before any components that extend AbstractIndexDescriptor are created.\nFollowing these changes, users should no longer experience the aforementioned NPE. The system can now provide early alerts if there's an attempt to call the function before applicationContext is set."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5970",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): 5787 NPE issue fix",
+    "releaseNoteText": "\nUsers were experiencing a null pointer exception (NPE) when trying to utilize certain functionalities of the system. This led to an unexpected system failure and disrupted the user experience.\nThe underlying cause of this issue was a lack of null checks in the backend code, leading to an unhandled null reference. This was particularly present in the handling of certain user actions, causing the system to break.\nTo resolve this, we introduced additional null pointer checks in our backend code to validate the objects before use. This prevents any null reference from being accessed without validation.\nAs a result, users can leverage the system functionalities without experiencing any unexpected system failures due to NPE issues. The system works smoothly, and user interactions are handled without causing any Null Pointer Exceptions, leading to an improved user experience and reliable system performance."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5959",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): OpensearchIncidentDao implementation",
+    "releaseNoteText": "Sorry for the confusion earlier. As I can not find any specific issue details in the provided information, it's really difficult for me to generate release notes. Please include information on what problem was observed (consequence), what caused it (cause), what changes were made to fix the issue (fix), and how it affected functionality after changes were implemented (result). This will allow me to generate a correct release note."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5962",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): fix timeout for Opensearch healthcheck",
+    "releaseNoteText": "The system was failing to conduct a health check for Opensearch due to an inappropriately timed timeout, causing inconveniences in assessing the system's status.\nThis was caused by inappropriate configuration settings in the backend of the system that allocated insufficient time for Opensearch's health check function to run.\nA code adjustment was made on the backend to correct the timing settings of the Opensearch health check, allowing it sufficient time to function as expected.\nNow, the system's health check function operates correctly within the set timeframe, contributing to a more reliable assessment of Opensearch's status."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5935",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): OpenSearch: Workaround for Parent Aggregation issue in java client (#5787)",
+    "releaseNoteText": "The system was showing less than accurate results when queries had parent aggregations. \nThe issue arose due to a limitation in the Java client, which did not properly handle parent aggregations in OpenSearch requests.\nA new method, 'searchAsMap,' was introduced to the ExtendedOpenSearchClient and OpenSearchDocumentOperations to properly handle this case.\nWith this fix, accurate results are generated when executing queries with parent aggregations in the system."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5897",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): Workaround for search_after issue in OS java client (#5788)",
+    "releaseNoteText": " \nBefore this fix, there was an issue in the `SearchRequest` method of OpenSearch Java client leading to erroneous functionalities within the `OpenSearchClient`.\n \nThe problem was due to a bug present in the OpenSearch Java client's `SearchRequest` method. This bug was not properly intercepting and handling search requests.\n \nA workaround was created by implementing a new method `fixedSearch` under the `ExtendedOpenSearchClient`. Additionally, a bespoke `FixedSearchRequest` - a modified copy of `SearchRequest` with the necessary fixes - was created, making the necessary fix at the product level.\n \nWith the application of the fix, search requests are now handled appropriately in the `OpenSearchClient`. If the `OpenSearchClient` is an instance of `ExtendedOpenSearchClient`, the `fixedSearch` method is used to optimize the functionality. This fix makes the system more robust and future removal of the `ExtendedOpenSearchClient`, once an official fix is implemented in OpenSearch client, easier."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/operate/issues/5879",
+    "component": "Operate",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix(backend): 5788 Add opensearch-java-client module",
+    "releaseNoteText": "The backend was lacking a module to interface with OpenSearch, which was limiting its functionality and compatibility.\nThe system was missing the opensearch-java-client module, which prevented backend integration with OpenSearch.\nDevelopers added the missing opensearch-java-client module to the backend in this update.\nThe system now includes the opensearch-java-client module, improving its functionality and extending compatibility with OpenSearch."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3900",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: support for ES 8.9",
+    "releaseNoteText": "The software wasn't supportive of Elasticsearch version 8.9, inhibiting users from taking advantage of the latest features and improvements of ES 8.9+.\nThe ElasticSearchConnector wasn't configured properly to support ES 8.9+. This was further compounded by compatibility issues between Spring Boot 3.1 and ES Java Client 8.9.\nThe fix involved the addition of a new Bean to the ElasticSearchConnector and updating ES versions at all essential places in the software. This adaptation was made following a proposed workaround for addressing Spring Boot 3.1 incompatibility with ES Java Client 8.9.\nUsers can now effectively use the improved features that come with ES 8.9+, as the software now provides full support for Elasticsearch version 8.9+."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3868",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: Implement User Group Retrieval and Access Restrictions in Tasklist (Self Management)",
+    "releaseNoteText": "Apologies for the misunderstanding, but I don't see any specific GitHub issue text in your request. Could you please provide me with a GitHub issue to generate a release note?"
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3786",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: Extend Task Search API to Include Task Variables",
+    "releaseNoteText": "Consequence:\nUsers were not previously able to fetch task variables when searching for tasks using the task Search API.\nThe API was not set up to pull task variable information during a task search. \nThe task Search API was updated to fetch task variables. This was done by using `VariableService.getVariablesPerTaskId(List<GetVariablesRequest>)` to fetch tasks' variables that match the `includeVariables` in the search request. \nNow when users search for tasks, they can also pull the associated task variables. This includes runtime variables for `CREATED` tasks and task variables for `COMPLETED` tasks. Note that draft variables are not fetched."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3899",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: Update error message when form fetch fails",
+    "releaseNoteText": " Previously, users were receiving unclear error messages when an attempt to fetch forms failed. \n The underlying problem was rooted in the description logic of the system, which was not properly coded to provide specific error messages according to the particular error causing a form fetch to fail.\n The error messages linked to form fetching failure have been updated and improved. This was achieved by modifying the description logic in the code to more accurately represent the reason for the failure.\n Now, when a form fetching failure occurs, users receive a specific and understandable error message, allowing easier identification and rectification of the issue."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3846",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: use identity spring boot starter",
+    "releaseNoteText": " Users were unable to authenticate with Azure AD via the Tasklist interface.\n The old configuration style for the Identity SDK wasn't suitable for dealing with Azure AD.\n The configuration style for the Identity SDK was changed to the new Spring Boot Start approach which included successful testing with Azure AD.\n Users should now be able to authenticate Tasklist using Azure AD plugin with the new spring boot start approach configuration."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3738",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: Delete process definition in Tasklist",
+    "releaseNoteText": " Users noticed that upon deleting a Process definition, related elements in the Tasklist such as Tasks, TaskVariables, Process entity, and Embedded forms did not get deleted accordingly. ProcessInstances were untouched as they didn't refer to the process definition id. This created clutter and confusion in the Tasklist. \n The system didn't have an action to handle the deletion of process definition related objects in Tasklist upon the deletion of a Process definition event.\n A feature was implemented that deletes related objects in the Tasklist on the deleting of a Process definition event. Tasks on the partition provided in Zeebe record, TaskVariables, the Process entity, and Embedded forms are deleted accordingly. \n Now, users can see that upon deleting a Process definition, all related objects in the Tasklist are also deleted. This clears away any related objects that are no longer in use, leading to a clean and straightforward user experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3749",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat(form): replace carbon-styles with SASS stylesheet",
+    "releaseNoteText": "The use of carbon-styles had created dependency issues, affecting the seamless execution of the Form-JS program. This issue was marked by idiosyncrasies in the stylesheet, effectively hampering the user experience. \nThe outdated carbon-styles system was being utilized in the program, instead of the more current and effective SASS stylesheet. \nThe deprecated carbon-styles was replaced with the SASS stylesheet, effectively mitigating the issue. This was implemented following a systematic review and testing procedure, ensuring the compatibility and efficiency of the SASS stylesheet. \nThe Form-JS program now operates with increased efficiency, reliability, and cleanliness, thanks to the implementation of the SASS stylesheet. Dependencies related to the stylesheet are no longer an issue, directly enhancing user experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3746",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "🚀 New Features",
+    "title": "feat: add the java event for the form deletion ",
+    "releaseNoteText": " Previously, users were unable to delete forms in importer 8.4.0 as this function was unsupported, impacting system utility and user experience. \n This issue resulted from a lack of support for Form Deletion in importer 8.4.0 in the initial software design.\n Support for Form Deletion in importer 8.4.0 was added, and the relevant integration tests were updated. The necessary APIs for handling deletion were also prepared and merged in prior PRs, completing the core functionality.\n Users can now delete forms in importer 8.4.0, enhancing the overall functionality of the software. The system reliably supports this action following successful tests and approvals."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3967",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: Some Identity configuration parameters are not taken from CAMUND…",
+    "releaseNoteText": " Previously, certain Identity configuration parameters were not being properly received from CAMUNDA_TASKLIST_* environment variables. This led to issues in configuring the Identity aspects of the system, compromising its functionality. \n The issue was caused by a technical oversight regarding how environmental variables were handled within the system. \n The problem was rectified by ensuring the correct handling of CAMUNDA_TASKLIST_* environment variables within the system configuration. The underlying code responsible for this was modified accordingly. \n Users can now successfully configure Identity parameters using the CAMUNDA_TASKLIST_* environment variables. The system operates as intended, respecting user-defined configurations in the Identity parameters."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3955",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: temporar fix for clear scroll for AWS opensearch",
+    "releaseNoteText": "Users experienced an exception when attempting to clear scroll for AWS opensearch, as reported in issue #3939.\nThis was due to an underlying technical issue in our exception handling related to AWS opensearch.\nWe implemented a temporary fix for the issue by catching the exception being thrown. \nNow, users should not experience this exception when attempting to clear scroll for AWS opensearch. However, a long-term solution is still being sought."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3904",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: creating aliases in case they don't exist",
+    "releaseNoteText": "Users faced problems while creating aliases, resulting in lack of functionality and user dissatisfaction.\nIn the former product configuration, the potential for aliases to be nonexistent was not properly addressed. This was due to the absence of checks and balances in place to ensure their creation.\nThis issue was addressed by implementing a system that verifies the existence of aliases. If they don't exist, the system now creates them.\nNow, when users attempt to create aliases, the product ensures their successful creation, leading to a smoother and more efficient user experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3940",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: Fix Archiving for Opensearch",
+    "releaseNoteText": "Users experienced a timing out issue with the run-os when attempting to use the ArchiverIT.shouldDeleteProcessInstanceRelatedData function. \nThis was caused by a technical fault within the system, resulting in the ArchiverIT function being stuck and consequently causing timeouts in the run-os.\nThe developers resolved the issue by identifying and debugging the root cause of the ArchiverIT function being locked, the necessary adjustments were made, and the function was successfully unblocked. The tests then verified the acceptance criteria identified in the issue.\nThe system now allows for processes to run smoothly when the ArchiverIT.shouldDeleteProcessInstanceRelatedData function is utilized, with no reports of timing out in the run-os. This fix improves user experience and system efficiency."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3452",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: apply `rolloverBatchSize` when collecting instances to archive",
+    "releaseNoteText": "Users were experiencing issues when trying to archive instances due to the system not properly applying the `rolloverBatchSize`. This caused a hinderance in the process of archiving instances. \nThe underlying cause was a problem in the coding of the software. The code was not accurate in its implementation of collecting instances for archiving, particularly where `rolloverBatchSize` should have been applied. \nThe technical fix involved correcting the coding error by ensuring the `rolloverBatchSize` was correctly applied when collecting instances to archive. \nNow, when attempting to archive instances, the process runs smoothly with the `rolloverBatchSize` correctly implemented. This resulted in improved functioning of instance archiving."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3896",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: return formId instead of null when has no form active",
+    "releaseNoteText": "Users were unable to handle 404 exception for 'get forms' on 'Start Process by Form' as the system used to return null instead of formId when there was no form active, causing disruption in the workflow process.\nThe underlying issue was in the specific area of the code where formId was expected to be returned, but it returned null if no form was active.\nThe code was modified to return the formId instead of null, even when there is no form active.\nAs a result of this change, users can now appropriately handle a 404 exception for 'get forms' on 'Start Process by Form' even if there is no form active, which ensures a smoother and more efficient workflow process."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3887",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: fixing AWS OpenSearch Connection",
+    "releaseNoteText": "Users were previously unable to connect to AWS OpenSearch due to lack of support in the system.\nThe system was initially engineered without the necessary configuration to support AWS OpenSearch.\nThe necessary configurations were added to the system to support AWS OpenSearch.\nUsers can now establish a connection to AWS OpenSearch using the system."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3818",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: Prevent big forms from being cropped",
+    "releaseNoteText": "Users encountered a problem where large forms were being cropped, hindering their ability to interact with all content. \nThe issue was due to the inability of the system to adequately resize to accommodate forms of a larger size, causing them to be cropped. \nCode adjustments were made to ensure that the system can properly scale to the size of incoming forms, preventing them from being cropped. \nNow, no matter the size of the form, the system scales appropriately ensuring that no content is cropped and users can interact with the full form."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3778",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: Show error messages when variable fetch fails",
+    "releaseNoteText": "Users were not received any error messages when the fetch for variables failed, causing confusion as to whether the program was working correctly.\nThe system was not properly configured to provide notifications or error messages when the variables request failed.\nAn error handling mechanism was added to show an error message when a request to fetch variables fails.\nNow, when the variables request fails, users are immediately notified with an error message, improving system clarity and user experience."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3852",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: extract the var retrieve from the loop + add log messages (#3817)",
+    "releaseNoteText": "Users were experiencing inefficiencies in the system due to a variable retrieval process located within a loop causing longer processing times. There was also a lack of informative log messages, making problem investigation challenging.\nThis issue was technically caused by the design of the code where the variable retrieval was unnecessarily implemented inside a loop. Such placement resulted in repeated and redundant operations, culminating in slower performance. Insufficient logging was also due to inadequate consideration for debugging during the early-stage development.\nDevelopers extracted the variable retrieval out of the loop to avoid unnecessary repeated processes. They also introduced more informative log messages in the system to improve debugging and investigation.\nWith the fix in place, the system now performs operations more efficiently, resulting in faster response times. Enhanced log messages also provide more context, making the system easier to manage and troubleshoot."
+  },
+  {
+    "release": "8.4.0-alpha2",
+    "url": "https://github.com/camunda/tasklist/issues/3848",
+    "component": "Tasklist",
+    "subcomponent": "Misc",
+    "context": "💊 Bugfixes",
+    "title": "fix: replace null string to object mapper node",
+    "releaseNoteText": "In the past, the front end was unable to interpret \"null\" enclosed in quotes. This led to complications in data manipulation and was observable by users in form of the system failing to correctly handle null data inputs. \nThis issue was originally due to a patch applied to prevent null pointer exceptions in the backend, which involved representing null values as a string with quotes (\"null\") rather than using the object mapper's null node. \nTo resolve the problem, the \"null\" string was replaced with an Object Mapper method that presents null as a null node. \nNow, when there's a null data, both the front end and the backend can reliably interpret and handle it correctly. This change enhances data manipulation in the system and eliminates previous issues related to null data input handling."
+  }
+]

@@ -2,18 +2,27 @@
 import { Octokit } from "@octokit/rest";
 import dotenv from "dotenv"
 import fs from "fs"
-import { RELEASE_TAG } from "./stage-00-set-release";
+import { stage_one_output_filename, stage_two_error_filename, stage_two_output_filename } from "./constants";
 
 dotenv.config()
 
-const octokit = new Octokit({
+const octokitCamunda = new Octokit({
     auth: process.env.GITHUB_TOKEN,
 });
+
+const octokitCamundaCloud = new Octokit({auth: process.env.CAMUNDA_CLOUD_GITHUB_TOKEN})
 
 interface GitHubIssueInfo {
     owner: string | null;
     repo: string | null;
     issue_number: number | null;
+}
+
+const octokit = (owner: string) => {
+    if (owner === 'camunda-cloud') {
+        console.log(`Using camunda-cloud token`)
+    }
+    return owner === 'camunda-cloud' ? octokitCamundaCloud : octokitCamunda
 }
 
 export async function getGitHubPullRequestText(githubIssueUrl: string) {
@@ -23,7 +32,7 @@ export async function getGitHubPullRequestText(githubIssueUrl: string) {
         return ""
     }
 
-    const i = await octokit.pulls.get({
+    const i = await octokit(owner).pulls.get({
         pull_number,
         repo,
         owner
@@ -44,13 +53,13 @@ export async function getGitHubIssueText(githubIssueUrl: string) {
         return ""
     }
 
-    const i = await octokit.issues.get({
+    const i = await octokit(owner).issues.get({
         issue_number,
         repo,
         owner
     })
 
-    const comments = await octokit.issues.listComments({
+    const comments = await octokit(owner).issues.listComments({
         owner,
         repo,
         issue_number
@@ -101,8 +110,7 @@ function delay(ms: number) {
 } 
 
 async function main() {
-    const inputFile = `02-release-issues-${RELEASE_TAG}.json`
-    const issues = JSON.parse(fs.readFileSync(inputFile, {encoding: "utf8"}))
+    const issues = JSON.parse(fs.readFileSync(stage_one_output_filename, {encoding: "utf8"}))
     const issuesWithText: any[] = []
     const issuesWithError: any[] = []
     for (let issue of issues) {
@@ -117,12 +125,10 @@ async function main() {
         }
         await delay(1000)
     }
-    const outputFile = `03-release-issues-with-text-${RELEASE_TAG}.json`
-    const outputErrorFile = `03-release-issues-with-errors-${RELEASE_TAG}.json`
-    fs.writeFileSync(outputFile, JSON.stringify(issuesWithText, null, 2), {encoding: "utf8"})
-    fs.writeFileSync(outputErrorFile, JSON.stringify(issuesWithError, null, 2), {encoding: "utf8"})
-    console.log(`Wrote ${issuesWithText.length} issues to ${outputFile}`)
-    console.log(`Wrote ${issuesWithError.length} issues to ${outputErrorFile}`)
+    fs.writeFileSync(stage_two_output_filename, JSON.stringify(issuesWithText, null, 2), {encoding: "utf8"})
+    fs.writeFileSync(stage_two_error_filename, JSON.stringify(issuesWithError, null, 2), {encoding: "utf8"})
+    console.log(`Wrote ${issuesWithText.length} issues to ${stage_two_output_filename}`)
+    console.log(`Wrote ${issuesWithError.length} issues to ${stage_two_error_filename}`)
 }
 
 main()
