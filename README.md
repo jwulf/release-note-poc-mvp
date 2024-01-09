@@ -464,14 +464,18 @@ Previously, a process model with a compensation end event could not be deployed 
 ####  5.1.30. <a name='IcanmodelaprocesswithcompensationeventsviaBPMNmodelAPIhttps:github.comcamundazeebeissues14939'></a>[I can model a process with compensation events via BPMN model API](https://github.com/camunda/zeebe/issues/14939)
 
 A new API for modeling a BPM compensation event has been implemented with this release. It is now accomplished with the following code:
-&#x60;&#x60;&#x60;java
+
+```java
   Bpmn.createProcess().startEvent()
-    .userTask(&quot;task&quot;)
-    .boundaryEvent(&quot;boundary&quot;)
-    .compensation(c -&gt; c.userTask(&quot;compensate&quot;))
-    .moveToActivity(&quot;task&quot;)
-    .endEvent(&quot;theend&quot;)
+    .userTask("task")
+    .boundaryEvent("boundary")
+    .compensation(c -> c.userTask("compensate"))
+    .moveToActivity("task")
+    .endEvent("theend")
     .done(); 
+```
+Note that this is part of the ongoing work to implement full support for Compensation Event, which is targeted to arrive completed in 8.5.
+ 
 ###  5.2. <a name='ZeebeMiscBugFixes'></a>Zeebe > Misc > Bug Fixes
 ####  5.2.1. <a name='Aftercancellationacompletedchangeoperationshouldnotoverwriteupdatedtopologyhttps:github.comcamundazeebeissues15726'></a>[After cancellation, a completed change operation should not overwrite updated topology](https://github.com/camunda/zeebe/issues/15726)
 
