@@ -971,7 +971,6 @@ We have adjusted the technical logic by replacing &quot;JOIN tenants&quot; with 
 Currently, users can successfully retrieve existing access rules even if they are not associated with any tenant.
 ####  7.2.13. <a name='fix:updatespringboottov3.1.5mainhttps:github.comcamunda-cloudidentityissues2227'></a>[fix: update spring boot to v3.1.5 (main)](https://github.com/camunda-cloud/identity/issues/2227)
 
-Without the details of the specific GitHub issue, I cannot provide a complete release note. However, I can give you an example based on the given repository update:
  Before this fix, the application was running on an older version (3.1.4) of the Spring Boot framework.
  Regular updates are crucial for the application to function optimally and securely. The previous version of Spring Boot had some noted bugs and deficiencies that could have affected the application&#x27;s performance.
  The application dependencies were updated from Spring Boot version 3.1.4 to version 3.1.5. This upgrade encompasses simultaneous enhancements to the &#x27;spring-boot-starter&#x27;, &#x27;spring-boot-configuration-processor&#x27;, &#x27;spring-boot-autoconfigure&#x27;, and &#x27;spring-boot&#x27; packages.
@@ -984,11 +983,9 @@ The solution to this issue was to update the environment to build new artifacts 
 Now, the &#x60;-starter&#x60; and &#x60;-autoconfigure&#x60; artifacts correctly deploy due to the compatibility with Java 17.
 ####  7.2.15. <a name='fix:upgradeorg.springframework.boot:spring-boot-starter-webfrom3.1.4to3.1.5https:github.comcamunda-cloudidentityissues2191'></a>[fix: upgrade org.springframework.boot:spring-boot-starter-web from 3.1.4 to 3.1.5](https://github.com/camunda-cloud/identity/issues/2191)
 
-Consequence:
 Previously, users were experiencing a range of security vulnerabilities when utilizing the application due to outdated dependencies. Concerns included denial of service (DoS) attacks, improper input validation, incomplete cleanup, and arbitrary code execution. 
 The cause of these vulnerabilities was the use of the 3.1.4 version of org.springframework.boot:spring-boot-starter-web. This version had previously identified vulnerabilities that left the system open to possible breaches. 
 To remedy these vulnerabilities, we upgraded the org.springframework.boot:spring-boot-starter-web from version 3.1.4 to 3.1.5 in the management-api/pom.xml file. 
-Result:
 Users can now utilize the application with improved security measures in place. The upgrade to the org.springframework.boot:spring-boot-starter-web dependency to version 3.1.5 has mitigated the prior identified vulnerabilities, leading to fewer opportunities for breaches and a safer user experience.
 ####  7.2.16. <a name='fix:resolvelazyloadingissuewithtenantslinkedtoaccessruleshttps:github.comcamunda-cloudidentityissues2180'></a>[fix: resolve lazy loading issue with tenants linked to access rules](https://github.com/camunda-cloud/identity/issues/2180)
 
