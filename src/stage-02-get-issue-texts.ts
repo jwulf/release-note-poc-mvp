@@ -12,12 +12,6 @@ const octokitCamunda = new Octokit({
 
 const octokitCamundaCloud = new Octokit({auth: process.env.CAMUNDA_CLOUD_GITHUB_TOKEN})
 
-interface GitHubIssueInfo {
-    owner: string | null;
-    repo: string | null;
-    issue_number: number | null;
-}
-
 const octokit = (owner: string) => {
     return owner === 'camunda-cloud' ? octokitCamundaCloud : octokitCamunda
 }

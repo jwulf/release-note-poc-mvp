@@ -1,0 +1,525 @@
+{
+  "1774": {
+    "issueNumber": 1774,
+    "title": "Multi-Tenancy: Signal Events",
+    "status": "Open",
+    "labels": [
+      "component:operate",
+      "component:tasklist",
+      "priority:high",
+      "component:zeebe-process-automation",
+      "component:dx",
+      "target:8.4",
+      "designRequired:no",
+      "target:8.4-alpha2",
+      "version:8.4-alpha1",
+      "docsRequired:simple"
+    ],
+    "body": "For more information and best practices, please visit confluence.\nValue Proposition Statement 🚀\nUse Signal Events with a cluster that has Multi-Tenancy activated.\nUser Problem 🤦\n\n\nSignal Events cannot be used with Multi-Tenancy currently, but Signal Events were introduced with Camunda 8.3.\n\n\nThis means users who have Multi-Tenancy activated and using it are required to find a replacement for Signal Events.\n\n\nUser Stories 🧑‍🚀\nAs a Developer, I can deploy processes with Signal Events to a tenant. \nAs a Developer, I can trigger signals via API.\nImplementation 👷\nImplementation Notes\nBroadcastSignal RPC: For a multi-tenant user, an explicit tenant id is required. A signal can’t be broadcast, as it must define on which tenant it will start process instances or be caught in existing ones.\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Tasks\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Tasks, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Zeebe supports multi-tenancy for BPMN signal events\n\n      zeebe#13336\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      8 of 8\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/db\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          target:8.4\n\n        \n\n          version:8.4.0\n\n        \n\n          version:8.4.0-alpha1\n\n      \n\n        \n\n            +8\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/db\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                target:8.4\n\n              \n\n                version:8.4.0\n\n              \n\n                version:8.4.0-alpha1\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Tasks\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\n‌",
+    "comments": [
+      "Link to feature: https://camunda.productboard.com/feature-board/planning/features/23809923",
+      "Breakdown\nThis section links to various sub-issues / -tasks contributing to respective epic phase or phase results where appropriate.\n\nBreakdown doc\ncamunda/zeebe#13336\n\nDiscovery phase\nExample: link to \"Conduct customer interview with xyz\"\nDefine phase\n\n\nConsider: UI, UX, technical design, documentation design\n\n\nAsk yourself: how is this going to be supported? Can we do something to enable the Support team to deal with support tickets without reaching out to e.g., the engineering team?\n\n\nExample: link to \"Define User-Journey Flow\" or \"Define target architecture\"\n\n\nDesign Planning\n\n\n`Reviewed by design: Oct 2023\n\n\n`Designer assigned: No design needed\n\n\nDocumentation Planning\n\n\nComplex changes must be reviewed during the Define phase by the DRI of Documentation or technical writer.\n\n\nBriefly describe the anticipated impact to documentation\n\n\nExample: \"Creates structural changes in docs as UX is reworked.\" Add docs reviewer to Epic for feedback.\n\n\nRisk Management\n\n\nAssessment: Link to the risk assessment in one trust.\n\n\nRisk Class: Add the risk class of the identified risk. If multiple risks have been identified enter the highest identified risk class.\n\n\nImplement phase\nExample: link to \"Implement User Story xyz\". Should not only include core implementation, but also documentation.\nValidation Criteria\nCriteria indicating success, for example metrics collected using telemetry. To be used during Validation phase to evaluate the success of the overall Epic.\nValidate phase\nExample: link to \"Evaluate usage data of last quarter\"\nLink to additional collateral",
+      "@abbasadel I created this epic to make work on Signal Events for MT transparent. As agreed we have this now as 8.4 target. I believe I can move it to Define already as we discussed topic already. let me know if there is anything else required",
+      "@felix-mueller - Do you think this feature will require design involvement?",
+      "@felix-mueller - Do you think this feature will require design involvement?\n\n@melanie-butcher - No, I changed label to no",
+      "@koevskinikola could you perhaps help and add the zeebe breakdown for signal event for Multi-Tenancy to this epic?",
+      "@felix-mueller I've included the Zeebe issue in this issue's description. The task breakdown is already defined there.\nThe ZPA team multi-tenancy breakdown document (including Signals) can be found here,. Should we reference it in this issue?",
+      "I see dx tagged as a component team here. Is this due to the API changes?",
+      "I see dx tagged as a component team here. Is this due to the API changes?\n\n@akeller - correct this was the idea. is there a better component to tag for these kind of changes?",
+      "@felix-mueller nope! This works great. You are the first to use it 😎 so I'll set expectations with my team.\n@jwulf @1nb0und, FYI on this topic. This will have API changes, which will need to be handled by the SDKs. Please create an issue for tracking your work to support this epic.",
+      "@felix-mueller as I started the implementation of multi-tenancy for signal broadcasting in Zeebe, I moved this issue to Implement. We already defined what we want to add in signals with the previous dev iteration.",
+      "Is Desktop Modeler involved in this epic? This would help us prioritize @jwulf's work for updating Node Zeebe.",
+      "Is Desktop Modeler involved in this epic? This would help us prioritize @jwulf's work for updating Node Zeebe.\n\n@akeller - no, this is independent from Desktop Modeler",
+      "To quote Nikola: Signal broadcasting and resource deletion are in Zeebe 8.4.0-alpha1 . Hence I am also tagging this for alpha1",
+      "Sorry for the confusion everyone - my mistake.\nWhile we deliver this internally with alpha1 (Zeebe scope), we yet need to have full integration testing prior to delivering this externally. Since the labels shall indicate the external delivery scope, I am marking this for alpha2 again.",
+      "@johanwelgemoed @marcosgvieira @RomanJRW - I added labels for webapps here as I heard we are still missing tasks for QA on each component. can you link issues if this is true? if you believe nothing is needed, feel free to remove the label.",
+      "@akeller docs were added from the Zeebe side with camunda/camunda-docs#2820. AFAIK no other documentation is needed.",
+      "Thanks @felix-mueller. I have removed Optimize from this - we have test coverage sufficient for this scenario 👍",
+      "A summary on the remaining TO-DOs for MT can be found here.",
+      "@felix-mueller can we move this to validate?",
+      "@koevskinikola can you help here? I asked Abbas here this morning: https://camunda.slack.com/archives/C060P7JCNEP/p1702546160649049\nbut I think he is out\n\nAs far as I can tell docs are adjusted\nFeature is ready in Zeebe\nBut other teams (Operate and Tasklist wanted to have tests)?",
+      "Hi @felix-mueller , I added my updates yesterday here",
+      "Marking as version:8.4-alpha1 where this feature was delivered. This epic is still open, since e2e integration tests are not concluded yet. See #1774 (comment)",
+      "Assigning @abbasadel because he is coordinating the finalization of this epic (e.g., ensuring that e2e tests are followed up on)",
+      "Update from ELT: @mschoe is doing final e2e testing today. If successful, will move to validate.",
+      "@mschoe was this successful?",
+      "@mschoe confirmed on the 5th of Jan that there are no issues.\nMoving the Epic to validate\ncc: @aleksander-dytko"
+    ],
+    "completedTasks": 1,
+    "totalTasks": 1,
+    "tasks": [
+      {
+        "title": "Zeebe supports multi-tenancy for BPMN signal events",
+        "number": 13336,
+        "resourcePath": "/camunda/zeebe/issues/13336",
+        "closed": true
+      }
+    ],
+    "url": "https://github.com/camunda/product-hub/issues/1774",
+    "allTasksClosed": true,
+    "allTasksInRelease": true,
+    "tasksInRelease": [
+      {
+        "title": "Zeebe supports multi-tenancy for BPMN signal events",
+        "number": 13336,
+        "resourcePath": "/camunda/zeebe/issues/13336",
+        "closed": true
+      }
+    ],
+    "tasksMissingFromRelease": []
+  },
+  "12653": {
+    "issueNumber": 12653,
+    "title": "[EPIC] Zeebe multi-tenancy support",
+    "status": "Closed",
+    "labels": [
+      "kind/epic",
+      "component/clients",
+      "component/engine",
+      "component/gateway"
+    ],
+    "body": "Is your feature request related to a problem? Please describe.\nEnable Zeebe to support the concept of multiple tenants. Tenant data is clearly separated per tenant while reusing a single Zeebe cluster.\nTask breakdown\nThe goal of the first phase is to provide core multi-tenancy concepts/mechanisms in the Zeebe Broker and Gateway. These concepts will later be used as building blocks to support multi-tenancy in Zeebe.\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Phase 1 - provide core building blocks\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Phase 1 - provide core building blocks, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Provide an engine mechanism for verifying tenant access\n\n      #13235\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      4 of 4\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/engine\n\n        \n\n          kind/feature\n\n      \n\n        \n\n            +2\n      \n        \n        \n  \n    \n                  \n\n                component/engine\n\n              \n\n                kind/feature\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy in the Gateway\n\n      #13237\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      6 of 7\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/feature\n\n        \n\n          scope/gateway\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                kind/feature\n\n              \n\n                scope/gateway\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for deployments\n\n      #13238\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      7 of 7\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/db\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +6\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/db\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n          \n    \n\n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Phase 1 - provide core building blocks\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\nThe goal of phase 2 is to provide multi-tenancy support for core Zeebe concepts like process instances and jobs. The intention is to provide multi-tenancy support for these concepts early in the implementation so that other Camunda Platform 8 components are unblocked, and can start implementing multi-tenancy on their side as well.\nEach task of phase 2 covers the vertical implementation (engine, gateway, client, data migration, documentation) for a Zeebe concept. The vertical implementation of the deployments functionality can serve as an example.\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Phase 2 - unblock other C8 components\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Phase 2 - unblock other C8 components, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Add experimental multi-tenancy API to java client\n\n      #13517\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      7 of 7\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          area/project\n\n        \n\n          area/ux\n\n        \n\n          component/clients\n\n        \n\n          kind/feature\n\n        \n\n          scope/clients-java\n\n      \n\n        \n\n            +5\n      \n        \n        \n  \n    \n                  \n\n                area/project\n\n              \n\n                area/ux\n\n              \n\n                component/clients\n\n              \n\n                kind/feature\n\n              \n\n                scope/clients-java\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Add experimental multi-tenancy record schema to protocol\n\n      #13520\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          area/project\n\n        \n\n          component/protocol\n\n        \n\n          kind/toil\n\n        \n\n          scope/broker\n\n        \n\n          version:8.3.0\n\n        \n\n          version:8.3.0-alpha5\n\n        \n\n          version:8.3.0-alpha6\n\n      \n\n        \n\n            +7\n      \n        \n        \n  \n    \n                  \n\n                area/project\n\n              \n\n                component/protocol\n\n              \n\n                kind/toil\n\n              \n\n                scope/broker\n\n              \n\n                version:8.3.0\n\n              \n\n                version:8.3.0-alpha5\n\n              \n\n                version:8.3.0-alpha6\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Provide end-to-end tests for multi-tenancy\n\n      #14273\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          area/maintainability\n\n        \n\n          area/test\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                area/maintainability\n\n              \n\n                area/test\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for core BPMN process operations\n\n      #13279\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      6 of 9\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/db\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +6\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/db\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for job/incident/error processing\n\n      #13287\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      13 of 13\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/db\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          target:8.3\n\n      \n\n        \n\n            +6\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/db\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                target:8.3\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Topology request should be available to all clients when multi-tenancy is enabled\n\n      #14494\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +1\n      \n        \n        \n  \n    \n                  \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Phase 2 - unblock other C8 components\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\nPhase 3 expands the work of Phase 2 to the remaining Zeebe concepts. The goal is to provide full support for multi-tenancy in Zeebe.\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Phase 3 - vertically implement multi-tenancy across Zeebe components\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Phase 3 - vertically implement multi-tenancy across Zeebe components, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for BPMN message events\n\n      #13289\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      7 of 7\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/db\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n      \n\n        \n\n            +5\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/db\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for BPMN timer events\n\n      #13337\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      6 of 9\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/engine\n\n        \n\n          kind/feature\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                component/engine\n\n              \n\n                kind/feature\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for DMN decisions\n\n      #13282\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      7 of 7\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for process instance operations (modify, cancel, set variables)\n\n      #13288\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      3 of 3\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +5\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support Multi-tenant Form deployments\n\n      #14555\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/feature\n\n        \n\n          target:8.3\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                kind/feature\n\n              \n\n                target:8.3\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Document C8 multi-tenancy (in self-managed)\n\n      camunda-docs#2561\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      8 of 8\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component:zeebe\n\n        \n\n          kind/feature\n\n        \n\n          target:8.3\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                component:zeebe\n\n              \n\n                kind/feature\n\n              \n\n                target:8.3\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Phase 3 - vertically implement multi-tenancy across Zeebe components\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Required for 8.3 release\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Required for 8.3 release, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Multi-tenancy data migration is provided for ProcessingStates used by message correlation\n\n      #14470\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/task\n\n        \n\n          target:8.3\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                kind/task\n\n              \n\n                target:8.3\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Multi-tenancy data migration is provided for JobState\n\n      #14471\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/task\n\n        \n\n          target:8.3\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                kind/task\n\n              \n\n                target:8.3\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Re-enable QA SnapshotTest\n\n      #14427\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/task\n\n        \n\n          target:8.3\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                kind/task\n\n              \n\n                target:8.3\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Disable temporarily unsupported features with multi-tenancy enabled the non-default tenant\n\n      #14479\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      5 of 5\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/toil\n\n        \n\n          target:8.3\n\n      \n\n        \n\n            +2\n      \n        \n        \n  \n    \n                  \n\n                kind/toil\n\n              \n\n                target:8.3\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Switch to 8.3.0 release of Identity SDK\n\n      #14499\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          kind/task\n\n        \n\n          target:8.3\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                kind/task\n\n              \n\n                target:8.3\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Required for 8.3 release\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Required for 8.4 release\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Required for 8.4 release, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Zeebe supports multi-tenancy for BPMN signal events\n\n      #13336\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      8 of 8\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/db\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          target:8.4\n\n        \n\n          version:8.4.0\n\n        \n\n          version:8.4.0-alpha1\n\n      \n\n        \n\n            +8\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/db\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                target:8.4\n\n              \n\n                version:8.4.0\n\n              \n\n                version:8.4.0-alpha1\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy for Resource Deletion\n\n      #14279\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      5 of 5\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          component/engine\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          target:8.4\n\n        \n\n          version:8.4.0\n\n        \n\n          version:8.4.0-alpha1\n\n      \n\n        \n\n            +7\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                component/engine\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                target:8.4\n\n              \n\n                version:8.4.0\n\n              \n\n                version:8.4.0-alpha1\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support general-usage tenant-providing interceptor for SM\n\n      #14285\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          target:8.4\n\n        \n\n          version:8.4.0\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                target:8.4\n\n              \n\n                version:8.4.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Required for 8.4 release\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Enhancements/Tech Dept\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Enhancements/Tech Dept, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Make unsupported multi-tenancy features more visible\n\n      camunda-docs#2781\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      5 of 5\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component:docs\n\n        \n\n          component:zeebe\n\n        \n\n          kind/enhancement\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                component:docs\n\n              \n\n                component:zeebe\n\n              \n\n                kind/enhancement\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Improve error message when multi-tenancy is enabled without identity\n\n      #14374\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          impact/medium\n\n        \n\n          kind/toil\n\n        \n\n          version:8.4.0\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                impact/medium\n\n              \n\n                kind/toil\n\n              \n\n                version:8.4.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Allow using the default tenant even when no tenant associated to requester\n\n      #14497\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          scope/gateway\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                scope/gateway\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n          \n    \n\n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Add multi-tenancy support in the Zeebe Go client\n\n      #14477\n\n    \n  \n\n      \n        \n          \n    \n  \n      \n\n  \n      \n    \n    \n  \n\n\n      5 of 5\n  \n\n\n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          kind/feature\n\n        \n\n          scope/clients-go\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                kind/feature\n\n              \n\n                scope/clients-go\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support multi-tenancy in zbctl (the CLI client)\n\n      #15100\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/clients\n\n        \n\n          kind/feature\n\n        \n\n          scope/zbctl\n\n      \n\n        \n\n            +3\n      \n        \n        \n  \n    \n                  \n\n                component/clients\n\n              \n\n                kind/feature\n\n              \n\n                scope/zbctl\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n          \n    \n\n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Enhancements/Tech Dept\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\nAdditional context\n\nProduct Hub issue\nCamunda Platform 7 docs\nZPA kick-off doc (internal)",
+    "comments": [
+      "@koevskinikola Fyi I put supporting resource deletion in Phase 3. I didn't fully write it out yet, but I think it's important to list it so we don't forget.",
+      "@koevskinikola For keeping track of incurred tech debt:\n\n#14256",
+      "Issues related to tech debt incurred by the multi-tenancy implementation have been moved to #15710.",
+      "Closing this issue as the multi-tenancy epic is completed in Zeebe."
+    ],
+    "completedTasks": 28,
+    "totalTasks": 28,
+    "tasks": [
+      {
+        "title": "Provide an engine mechanism for verifying tenant access",
+        "number": 13235,
+        "resourcePath": "/camunda/zeebe/issues/13235",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy in the Gateway",
+        "number": 13237,
+        "resourcePath": "/camunda/zeebe/issues/13237",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for deployments",
+        "number": 13238,
+        "resourcePath": "/camunda/zeebe/issues/13238",
+        "closed": true
+      },
+      {
+        "title": "Add experimental multi-tenancy API to java client",
+        "number": 13517,
+        "resourcePath": "/camunda/zeebe/issues/13517",
+        "closed": true
+      },
+      {
+        "title": "Add experimental multi-tenancy record schema to protocol",
+        "number": 13520,
+        "resourcePath": "/camunda/zeebe/issues/13520",
+        "closed": true
+      },
+      {
+        "title": "Provide end-to-end tests for multi-tenancy",
+        "number": 14273,
+        "resourcePath": "/camunda/zeebe/issues/14273",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for core BPMN process operations",
+        "number": 13279,
+        "resourcePath": "/camunda/zeebe/issues/13279",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for job/incident/error processing",
+        "number": 13287,
+        "resourcePath": "/camunda/zeebe/issues/13287",
+        "closed": true
+      },
+      {
+        "title": "Topology request should be available to all clients when multi-tenancy is enabled",
+        "number": 14494,
+        "resourcePath": "/camunda/zeebe/issues/14494",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for BPMN message events",
+        "number": 13289,
+        "resourcePath": "/camunda/zeebe/issues/13289",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for BPMN timer events",
+        "number": 13337,
+        "resourcePath": "/camunda/zeebe/issues/13337",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for DMN decisions",
+        "number": 13282,
+        "resourcePath": "/camunda/zeebe/issues/13282",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for process instance operations (modify, cancel, set variables)",
+        "number": 13288,
+        "resourcePath": "/camunda/zeebe/issues/13288",
+        "closed": true
+      },
+      {
+        "title": "Support Multi-tenant Form deployments",
+        "number": 14555,
+        "resourcePath": "/camunda/zeebe/issues/14555",
+        "closed": true
+      },
+      {
+        "title": "Document C8 multi-tenancy (in self-managed)",
+        "number": 2561,
+        "resourcePath": "/camunda/camunda-docs/issues/2561",
+        "closed": true
+      },
+      {
+        "title": "Multi-tenancy data migration is provided for ProcessingStates used by message correlation",
+        "number": 14470,
+        "resourcePath": "/camunda/zeebe/issues/14470",
+        "closed": true
+      },
+      {
+        "title": "Multi-tenancy data migration is provided for `JobState`",
+        "number": 14471,
+        "resourcePath": "/camunda/zeebe/issues/14471",
+        "closed": true
+      },
+      {
+        "title": "Re-enable QA `SnapshotTest`",
+        "number": 14427,
+        "resourcePath": "/camunda/zeebe/issues/14427",
+        "closed": true
+      },
+      {
+        "title": "Disable temporarily unsupported features with multi-tenancy enabled the non-default tenant",
+        "number": 14479,
+        "resourcePath": "/camunda/zeebe/issues/14479",
+        "closed": true
+      },
+      {
+        "title": "Switch to 8.3.0 release of Identity SDK",
+        "number": 14499,
+        "resourcePath": "/camunda/zeebe/issues/14499",
+        "closed": true
+      },
+      {
+        "title": "Zeebe supports multi-tenancy for BPMN signal events",
+        "number": 13336,
+        "resourcePath": "/camunda/zeebe/issues/13336",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for Resource Deletion",
+        "number": 14279,
+        "resourcePath": "/camunda/zeebe/issues/14279",
+        "closed": true
+      },
+      {
+        "title": "Support general-usage tenant-providing interceptor for SM",
+        "number": 14285,
+        "resourcePath": "/camunda/zeebe/issues/14285",
+        "closed": true
+      },
+      {
+        "title": "Make unsupported multi-tenancy features more visible",
+        "number": 2781,
+        "resourcePath": "/camunda/camunda-docs/issues/2781",
+        "closed": true
+      },
+      {
+        "title": "Improve error message when multi-tenancy is enabled without identity",
+        "number": 14374,
+        "resourcePath": "/camunda/zeebe/issues/14374",
+        "closed": true
+      },
+      {
+        "title": "Allow using the default tenant even when no tenant associated to requester",
+        "number": 14497,
+        "resourcePath": "/camunda/zeebe/issues/14497",
+        "closed": true
+      },
+      {
+        "title": "Add multi-tenancy support in the Zeebe Go client",
+        "number": 14477,
+        "resourcePath": "/camunda/zeebe/issues/14477",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy in `zbctl` (the CLI client)",
+        "number": 15100,
+        "resourcePath": "/camunda/zeebe/issues/15100",
+        "closed": true
+      }
+    ],
+    "url": "https://github.com/camunda/zeebe/issues/12653",
+    "allTasksClosed": true,
+    "allTasksInRelease": false,
+    "tasksInRelease": [
+      {
+        "title": "Zeebe supports multi-tenancy for BPMN signal events",
+        "number": 13336,
+        "resourcePath": "/camunda/zeebe/issues/13336",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for Resource Deletion",
+        "number": 14279,
+        "resourcePath": "/camunda/zeebe/issues/14279",
+        "closed": true
+      },
+      {
+        "title": "Support general-usage tenant-providing interceptor for SM",
+        "number": 14285,
+        "resourcePath": "/camunda/zeebe/issues/14285",
+        "closed": true
+      },
+      {
+        "title": "Add multi-tenancy support in the Zeebe Go client",
+        "number": 14477,
+        "resourcePath": "/camunda/zeebe/issues/14477",
+        "closed": true
+      }
+    ],
+    "tasksMissingFromRelease": [
+      {
+        "title": "Provide an engine mechanism for verifying tenant access",
+        "number": 13235,
+        "resourcePath": "/camunda/zeebe/issues/13235",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy in the Gateway",
+        "number": 13237,
+        "resourcePath": "/camunda/zeebe/issues/13237",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for deployments",
+        "number": 13238,
+        "resourcePath": "/camunda/zeebe/issues/13238",
+        "closed": true
+      },
+      {
+        "title": "Add experimental multi-tenancy API to java client",
+        "number": 13517,
+        "resourcePath": "/camunda/zeebe/issues/13517",
+        "closed": true
+      },
+      {
+        "title": "Add experimental multi-tenancy record schema to protocol",
+        "number": 13520,
+        "resourcePath": "/camunda/zeebe/issues/13520",
+        "closed": true
+      },
+      {
+        "title": "Provide end-to-end tests for multi-tenancy",
+        "number": 14273,
+        "resourcePath": "/camunda/zeebe/issues/14273",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for core BPMN process operations",
+        "number": 13279,
+        "resourcePath": "/camunda/zeebe/issues/13279",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for job/incident/error processing",
+        "number": 13287,
+        "resourcePath": "/camunda/zeebe/issues/13287",
+        "closed": true
+      },
+      {
+        "title": "Topology request should be available to all clients when multi-tenancy is enabled",
+        "number": 14494,
+        "resourcePath": "/camunda/zeebe/issues/14494",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for BPMN message events",
+        "number": 13289,
+        "resourcePath": "/camunda/zeebe/issues/13289",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for BPMN timer events",
+        "number": 13337,
+        "resourcePath": "/camunda/zeebe/issues/13337",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for DMN decisions",
+        "number": 13282,
+        "resourcePath": "/camunda/zeebe/issues/13282",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy for process instance operations (modify, cancel, set variables)",
+        "number": 13288,
+        "resourcePath": "/camunda/zeebe/issues/13288",
+        "closed": true
+      },
+      {
+        "title": "Support Multi-tenant Form deployments",
+        "number": 14555,
+        "resourcePath": "/camunda/zeebe/issues/14555",
+        "closed": true
+      },
+      {
+        "title": "Document C8 multi-tenancy (in self-managed)",
+        "number": 2561,
+        "resourcePath": "/camunda/camunda-docs/issues/2561",
+        "closed": true
+      },
+      {
+        "title": "Multi-tenancy data migration is provided for ProcessingStates used by message correlation",
+        "number": 14470,
+        "resourcePath": "/camunda/zeebe/issues/14470",
+        "closed": true
+      },
+      {
+        "title": "Multi-tenancy data migration is provided for `JobState`",
+        "number": 14471,
+        "resourcePath": "/camunda/zeebe/issues/14471",
+        "closed": true
+      },
+      {
+        "title": "Re-enable QA `SnapshotTest`",
+        "number": 14427,
+        "resourcePath": "/camunda/zeebe/issues/14427",
+        "closed": true
+      },
+      {
+        "title": "Disable temporarily unsupported features with multi-tenancy enabled the non-default tenant",
+        "number": 14479,
+        "resourcePath": "/camunda/zeebe/issues/14479",
+        "closed": true
+      },
+      {
+        "title": "Switch to 8.3.0 release of Identity SDK",
+        "number": 14499,
+        "resourcePath": "/camunda/zeebe/issues/14499",
+        "closed": true
+      },
+      {
+        "title": "Make unsupported multi-tenancy features more visible",
+        "number": 2781,
+        "resourcePath": "/camunda/camunda-docs/issues/2781",
+        "closed": true
+      },
+      {
+        "title": "Improve error message when multi-tenancy is enabled without identity",
+        "number": 14374,
+        "resourcePath": "/camunda/zeebe/issues/14374",
+        "closed": true
+      },
+      {
+        "title": "Allow using the default tenant even when no tenant associated to requester",
+        "number": 14497,
+        "resourcePath": "/camunda/zeebe/issues/14497",
+        "closed": true
+      },
+      {
+        "title": "Support multi-tenancy in `zbctl` (the CLI client)",
+        "number": 15100,
+        "resourcePath": "/camunda/zeebe/issues/15100",
+        "closed": true
+      }
+    ]
+  },
+  "13237": {
+    "issueNumber": 13237,
+    "title": "Support multi-tenancy in the Gateway",
+    "status": "Closed",
+    "labels": [
+      "kind/feature",
+      "scope/gateway",
+      "version:8.3.0"
+    ],
+    "body": "Description\nFor multi-tenancy, the goal of the Zeebe Gateway is to:\n\nProvide data on the user's authorized tenants.\nForward this data (through the RecordMetadata) to the Zeebe Broker through a Broker*Request instance.\n\nFull support for multi-tenancy in the Zeebe gateway will be provided once camunda-cloud/identity#1819 is completed.\nFor this issue, the Zeebe Gateway should (only) support the following:\n\nProvide a Gateway configuration flag: zeebe.gateway.multiTenancy.enabled - default FALSE (disabled)\n\nThe flag should toggle multi-tenancy for the Zeebe cluster.\nAn enabled flag is preferred, as we will probably add additional multi-tenancy configuration properties in the future.\n\n\nExpand the IdentityInterceptor class. After the token is successfully verified the following should be performed:\n\nProvide a list of tenant ids the user has access to:\n\nIf multi-tenancy is disabled, the list should only contain the <default> tenant id (see #13235)\nIf multi-tenancy is enabled, the Identity SDK should be used to fetch the list of tenant ids (out-of-scope for this issue)\n\n\n[Proposal] Place the list of tenant IDs in a gRPC context to be forwarded to the EndpointManager/RequestMapper (consider doing it through a helper class).\n\n\nWe should provide a general (auth) API that the IdentityInterceptor class will implement. The goal is to provide an Identity-independent use of multi-tenancy, i.e. users can use a multi-tenant Zeebe without the need of Camunda Identity.\n\nAC:\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Tasks\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Tasks, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        I can use a Gateway configuration flag for multi-tenancy\n\n      #14041\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          scope/gateway\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                scope/gateway\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n          \n            \n              \n              The Gateway can set/get values from a gRPC context\n            \n\n            \n              \n                The Gateway can set/get values from a gRPC context\n\n              \n                The Gateway can set/get values from a gRPC context\n            \n          \n\n\n\n      \n        \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                        \n                  Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                        \n                  Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                        \n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n          \n            \n              \n              `IdentityInterceptor` class is expanded according to the description above.\n            \n\n            \n              \n                `IdentityInterceptor` class is expanded according to the description above.\n\n              \n                IdentityInterceptor class is expanded according to the description above.\n            \n          \n\n\n\n      \n        \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                        \n                  Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                        \n                  Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                        \n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Gateway rejects requests for unauthorized tenants\n\n      #14284\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/gateway\n\n        \n\n          kind/task\n\n        \n\n          scope/gateway\n\n        \n\n          version:8.3.0\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                component/gateway\n\n              \n\n                kind/task\n\n              \n\n                scope/gateway\n\n              \n\n                version:8.3.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        The C8 Helm chart is expanded with gateway configuration flag for multi-tenancy\n\n      #14307\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          area/project\n\n        \n\n          area/ux\n\n        \n\n          component/gateway\n\n        \n\n          kind/task\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                area/project\n\n              \n\n                area/ux\n\n              \n\n                component/gateway\n\n              \n\n                kind/task\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Tasks\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL\n    \n        \n            \n                \n    \n\n            \n            \n        \n  \n  \n  \n        \n      \n  \n  \n  \n  \n\n\n\n          \n    \n  \n\n\n  \n    \n      \n  \n      \n        \n    \n\n      \n    \n      The content you are editing has changed. Please copy your edits and refresh the page.\n\n      \n        \n  \n    \n    \n\n  \n        \n          \n              \n      \n        Title of tasklist\n    \n  \n    \n      \n\n    \n  \n    \n\n  \n    \n\n  \n\n    \n\n\n              \n    Cancel\n  \n\n\n              \n    Save\n  \n\n\n    \n      Out of scope\n            \n    \n\nEdit tasklist title\n\n\n\n\n        \n          Beta\n            Give feedback\n\n              \n  \n      \n    \n\nTasklist Out of scope, more options\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n    \n\n                  Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  \n                    Copy markdown\n                  \n\n\n  \n  \n\n      \n    \n    \n      \n        \n                            \n    \n\n                  Delete tasklist\n\n\n  \n  \n\n  \n\n\n\n      \n  \n\n              \n\n  \n    \n  \n    \n      \n        Delete tasklist\n      \n        Delete tasklist block?\n    \n    \n      \n    \n\n    \n  \n\n      \n        Are you sure? All relationships in this tasklist will be removed.\n      \n                          \n    Cancel\n  \n\n\n                    \n    Delete\n  \n\n\n\n\n      \n\n      \n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Support general-usage tenant-providing interceptor for SM\n\n      #14285\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          target:8.4\n\n        \n\n          version:8.4.0\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                target:8.4\n\n              \n\n                version:8.4.0\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n      \n        \n      \n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n            \n          \n            \n    \n\n          \n      \n            \n          \n    \n\n\n    \n        Cache authorization for token in gateway\n\n      #14396\n\n    \n  \n\n      \n        \n          \n    \n\n\n        \n      \n\n    \n      \n      \n    \n\n    \n        \n\n          area/performance\n\n        \n\n          component/gateway\n\n        \n\n          kind/feature\n\n        \n\n          scope/gateway\n\n      \n\n        \n\n            +4\n      \n        \n        \n  \n    \n                  \n\n                area/performance\n\n              \n\n                component/gateway\n\n              \n\n                kind/feature\n\n              \n\n                scope/gateway\n\n            \n\n              \n\n\n      \n\n      \n        \n  \n      \n          \n    \n\n\n\n      \n        \n  \n      \n    \n\nEdit...\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                      \n                  Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n      \n      \n        \n          \n    \n\n        \n        Successfully updated the issue's project\n      \n      \n        \n          \n    \n\n        \n        There was an error updating the issue's project\n      \n\n\n\n          \n            \n              \n    \n\n            \n            \n              \n                \n                \n              \n\n              \n                \n                  \n\n                \n                  \n              \n            \n            \n              \n  \n      \n    \n\nOptions\n\n\n\n  \n    \n                \n  \n      \n    \n    \n      \n        \n                            \n                      Convert to issue\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Toggle completion\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                    Rename\n\n\n  \n  \n\n      \n    \n    \n      \n        \n                          \n                      Remove\n\n\n  \n  \n\n  \n\n\n\n      \n  \n            \n          \n          \n            \n              \n    \n\n            \n            \n              \n            \n            \n          \n      \n\n            \n    \n      \n        \n    \n\n      \n    Add item to  Out of scope\n  \n\n\n  \n    \n      \n        \n          \n  \n    \n      Type to add an item or paste in an issue URL",
+    "comments": [
+      "@koevskinikola & @korthout,\n\n\n[...] After the token is successfully verified the following should be performed:\n\nProvide a list of tenant ids the user has access to:\n\nIf multi-tenancy is disabled, the list should only contain the  tenant id (see #13235)\n\n\n\n\n\n\nDoes that mean, that if tenancy is disabled, it will still ask Identity to provide a list of tenants?\nAnd another question: What happens if tenancy is disabled and Identity is not configured (i.e., Zeebe is used \"standalone\")? Does the Gateway still provide the default tenant to include it in the respective broker requests?",
+      "if tenancy is disabled, it will still ask Identity to provide a list of tenants?\n\nI don't think so, because that's the behavior when multi-tenancy is enabled.\n\nIf multi-tenancy is enabled, the Identity SDK should be used to fetch the list of tenant ids\n\nApart from the description, I would also find it very odd if Identity is still asked.\n\n\nWhat happens if tenancy is disabled and Identity is not configured (i.e., Zeebe is used \"standalone\")? Does the Gateway still provide the default tenant to include it in the respective broker requests?\n\nI would assume that the default tenant would be added to the tenant access ids list, so it can be used in the broker requests where the default tenant is assumed when multi-tenancy is disabled. This means data isolation can be guaranteed.",
+      "I moved #14285 out of scope and will link it to a different issue.",
+      "@abbasadel I've marked #14286 as closing this issue. I think that's fine for Zeebe, as #14307 is Helm Charts related and not blocking Zeebe.",
+      "Make sense. Thanks @korthout"
+    ],
+    "completedTasks": 4,
+    "totalTasks": 5,
+    "tasks": [
+      {
+        "title": "I can use a Gateway configuration flag for multi-tenancy",
+        "number": 14041,
+        "resourcePath": "/camunda/zeebe/issues/14041",
+        "closed": true
+      },
+      {
+        "title": "Gateway rejects requests for unauthorized tenants",
+        "number": 14284,
+        "resourcePath": "/camunda/zeebe/issues/14284",
+        "closed": true
+      },
+      {
+        "title": "The C8 Helm chart is expanded with gateway configuration flag for multi-tenancy",
+        "number": 14307,
+        "resourcePath": "/camunda/zeebe/issues/14307",
+        "closed": true
+      },
+      {
+        "title": "Support general-usage tenant-providing interceptor for SM",
+        "number": 14285,
+        "resourcePath": "/camunda/zeebe/issues/14285",
+        "closed": true
+      },
+      {
+        "title": "Cache authorization for token in gateway",
+        "number": 14396,
+        "resourcePath": "/camunda/zeebe/issues/14396",
+        "closed": false
+      }
+    ],
+    "url": "https://github.com/camunda/zeebe/issues/13237",
+    "allTasksClosed": false,
+    "allTasksInRelease": false,
+    "tasksInRelease": [
+      {
+        "title": "Support general-usage tenant-providing interceptor for SM",
+        "number": 14285,
+        "resourcePath": "/camunda/zeebe/issues/14285",
+        "closed": true
+      }
+    ],
+    "tasksMissingFromRelease": [
+      {
+        "title": "I can use a Gateway configuration flag for multi-tenancy",
+        "number": 14041,
+        "resourcePath": "/camunda/zeebe/issues/14041",
+        "closed": true
+      },
+      {
+        "title": "Gateway rejects requests for unauthorized tenants",
+        "number": 14284,
+        "resourcePath": "/camunda/zeebe/issues/14284",
+        "closed": true
+      },
+      {
+        "title": "The C8 Helm chart is expanded with gateway configuration flag for multi-tenancy",
+        "number": 14307,
+        "resourcePath": "/camunda/zeebe/issues/14307",
+        "closed": true
+      },
+      {
+        "title": "Cache authorization for token in gateway",
+        "number": 14396,
+        "resourcePath": "/camunda/zeebe/issues/14396",
+        "closed": false
+      }
+    ]
+  }
+}

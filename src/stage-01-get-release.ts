@@ -9,9 +9,7 @@ if (!process.env.GITHUB_TOKEN) {
     console.log('Warning! No GITHUB_TOKEN in environment.')
 }
 
-const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN,
-});
+const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
 
 // Grab the release RELEASE_TAG from GitHub via the API, and create a JSON object containing the issues in the release
 async function main() {
